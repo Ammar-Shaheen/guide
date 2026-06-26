@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metaphor: ReFantazio — 100% Walkthrough Guide</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0e13;--bg2:#16141c;--bg3:#1e1b27;--bg4:#252231;--border:#2e2a3d;--border2:#3d3858;--text:#e8e4f0;--text2:#a09ab8;--text3:#6b6482;--gold:#c9a84c;--gold2:#f0c96a;--gold3:#3a2e0a;--purple:#9b8dd4;--purple2:#7b6bbf;--purple3:#1e1830;--red:#c45c5c;--green:#5cad7c;--blue:#5c9bc4;--orange:#c4865c;--cyan:#5cc4c4;--pink:#c45c9b}
+html,body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh}
+.app{max-width:900px;margin:0 auto;padding:14px 12px 60px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:var(--bg2);border:.5px solid var(--border);border-radius:12px;margin-bottom:10px}
+.hl{display:flex;align-items:center;gap:10px}.crown{font-size:22px;color:var(--gold)}
+.header h1{font-size:15px;font-weight:600}.header-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.bsm{padding:5px 12px;border-radius:7px;font-size:11px;cursor:pointer;border:.5px solid #4a1010;background:var(--bg3);color:var(--red)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.sc{background:var(--bg2);border:.5px solid var(--border);border-radius:10px;padding:11px 13px;cursor:pointer;transition:border-color .15s}
+.sc:hover{border-color:var(--border2)}
+.sl{font-size:9px;color:var(--text3);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.sv{font-size:20px;font-weight:700;line-height:1}.ss{font-size:9px;color:var(--text3);margin-top:2px}
+.sc.beetles .sv{color:var(--gold2)}.sc.days .sv{color:var(--purple)}.sc.trophies .sv{color:var(--cyan)}.sc.tasks .sv{color:var(--green)}
+.nav{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
+.nb{padding:6px 14px;background:var(--bg2);border:.5px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.nb:hover{border-color:var(--border2);color:var(--text)}.nb.active{background:var(--purple3);border-color:var(--purple2);color:var(--purple)}
+.dnav{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--bg2);border:.5px solid var(--border);border-radius:12px;margin-bottom:10px}
+.arr{width:32px;height:32px;border-radius:7px;background:var(--bg3);border:.5px solid var(--border);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.arr:hover:not([disabled]){background:var(--bg4);border-color:var(--border2)}.arr[disabled]{opacity:.3;cursor:not-allowed}
+.dc{flex:1;min-width:0}
+.ddbtn{font-size:19px;font-weight:700;color:var(--gold2);line-height:1;cursor:pointer;border-bottom:1px dashed var(--gold3);padding-bottom:1px;display:inline-block}
+.ddbtn:hover{border-color:var(--gold)}.dsub{font-size:10px;color:var(--text3);margin-top:3px}
+.pbar{flex:1;max-width:180px;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--purple2),var(--gold));border-radius:2px;transition:width .4s}
+.dbtn{padding:6px 14px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:.5px solid;white-space:nowrap;transition:all .15s}
+.dbtn.done{background:#0f2a1a;border-color:var(--green);color:var(--green)}.dbtn.undone{background:var(--bg3);border-color:var(--border);color:var(--text2)}
+.cov{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
+.cov.open{display:flex}
+.cmod{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:18px 20px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto}
+.chd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.chd h2{font-size:14px;font-weight:600;color:var(--gold2)}
+.cx{width:28px;height:28px;border-radius:6px;background:var(--bg3);border:.5px solid var(--border);color:var(--text2);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cleg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;padding:8px 10px;background:var(--bg3);border-radius:8px;font-size:10px;color:var(--text2)}
+.cli{display:flex;align-items:center;gap:4px}.cld{width:9px;height:9px;border-radius:2px;border:1px solid}
+.cmonths{display:flex;flex-direction:column;gap:16px}
+.cmhd{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);margin-bottom:6px;padding-bottom:5px;border-bottom:.5px solid var(--border)}
+.cgrid{display:flex;flex-wrap:wrap;gap:4px}
+.cday{width:38px;height:34px;text-align:center;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;border:.5px solid transparent;transition:all .12s;line-height:34px;color:var(--text3)}
+.cday:hover{background:var(--bg3);border-color:var(--border);color:var(--text)}
+.cday.hb{border-color:var(--gold)!important;color:var(--gold2)}.cday.hm{border-color:var(--orange)!important;color:var(--orange)}.cday.hd{border-color:#702020!important;color:var(--red)}.cday.cdone{background:#0a1e10;border-color:#1a3a20!important;color:#3a7a50}.cday.ccur{outline:2px solid var(--purple2);outline-offset:1px;font-weight:700}.cday.cs{opacity:.35}
+.content{background:var(--bg2);border:.5px solid var(--border);border-radius:12px;padding:18px 20px}
+.pb{margin-bottom:15px}
+.pl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:8px}
+.pl.afternoon{background:#2a1a08;color:#e09040;border:.5px solid #7a4010}.pl.night{background:#0a0a2a;color:#8090e0;border:.5px solid #303070}.pl.story{background:#1a0a2a;color:#a070d0;border:.5px solid #503080}.pl.travel{background:#0a1a2a;color:#5090c0;border:.5px solid #204060}
+.ti{display:flex;gap:9px;padding:8px 10px;border-radius:7px;margin-bottom:3px;cursor:pointer;transition:background .1s;align-items:flex-start}
+.ti:hover{background:var(--bg3)}.ti.done{opacity:.42}
+.ti.done .tt{text-decoration:line-through;color:var(--text3)}
+.tc{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ti.done .tc{background:var(--green);border-color:var(--green)}
+.chk{color:#fff;font-size:10px;font-weight:700;display:none}.ti.done .chk{display:block}
+.tt{font-size:13px;color:var(--text);line-height:1.45}
+.tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;white-space:nowrap;letter-spacing:.04em}
+.tb{background:#3a2e0a;color:var(--gold2);border:.5px solid #7a5a10}
+.ttr{background:#0a2535;color:var(--cyan)}.tq{background:#0a2515;color:var(--green)}.tf{background:#250a35;color:var(--pink)}
+.td{background:#350808;color:#e07070;border:.5px solid #702020}
+.tm{background:#350f08;color:var(--orange);border:.5px solid #802010;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{border-color:#802010}50%{border-color:#e05010}}
+.dbanner{background:#150808;border:1px solid #6a1818;border-radius:10px;padding:13px 16px;margin-bottom:10px}
+.dbhd{display:flex;align-items:center;gap:7px;margin-bottom:7px}.dbhd h3{font-size:13px;font-weight:600;color:#f07070}
+.tip{font-size:12px;color:var(--text2);padding:7px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--gold);margin-bottom:9px;line-height:1.45}
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:6px}
+.ec{background:var(--bg3);border:.5px solid var(--border);border-radius:7px;padding:9px 11px}
+.en{font-size:11px;font-weight:600;color:var(--text);margin-bottom:5px}
+.wr{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:3px}
+.wl{font-size:8px;color:var(--text3);width:100%;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1px}
+.eb{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px}
+.vgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+.vc{background:var(--bg3);border:.5px solid var(--border);border-radius:9px;padding:11px;text-align:center}
+.vn{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.vr{font-size:19px;font-weight:700;margin-bottom:2px}.vp{font-size:9px;color:var(--text3);margin-bottom:6px}
+.vpips{display:flex;justify-content:center;gap:2px;flex-wrap:wrap;margin-bottom:7px}
+.pip{width:7px;height:7px;border-radius:50%;border:1px solid}
+.vbtns{display:flex;gap:3px;justify-content:center}
+.vbtn{padding:3px 6px;border-radius:4px;background:var(--bg4);border:.5px solid var(--border);color:var(--text2);font-size:10px;cursor:pointer;transition:all .12s}
+.vbtn:hover{border-color:var(--border2);color:var(--text)}
+.vc.wisdom .vn,.vc.wisdom .vr{color:#70a0e0}.vc.wisdom .pip{border-color:#2a4070}.vc.wisdom .pip.on{background:#70a0e0;border-color:#70a0e0}
+.vc.courage .vn,.vc.courage .vr{color:#e07050}.vc.courage .pip{border-color:#602818}.vc.courage .pip.on{background:#e07050;border-color:#e07050}
+.vc.tolerance .vn,.vc.tolerance .vr{color:#60b870}.vc.tolerance .pip{border-color:#184828}.vc.tolerance .pip.on{background:#60b870;border-color:#60b870}
+.vc.imagination .vn,.vc.imagination .vr{color:#b878e0}.vc.imagination .pip{border-color:#482868}.vc.imagination .pip.on{background:#b878e0;border-color:#b878e0}
+.vc.eloquence .vn,.vc.eloquence .vr{color:#e0be50}.vc.eloquence .pip{border-color:#685010}.vc.eloquence .pip.on{background:#e0be50;border-color:#e0be50}
+.bgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:14px}
+.bs{aspect-ratio:1;border-radius:6px;background:var(--bg3);border:.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.bs:hover{border-color:var(--gold)}.bs.got{background:#2a2008;border-color:var(--gold)}
+.bsn{font-size:9px;color:var(--text3)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:7px}
+.fc{background:var(--bg3);border:.5px solid var(--border);border-radius:8px;padding:10px 12px}
+.fn{font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px}
+.frr{display:flex;align-items:center;justify-content:space-between}
+.frl{font-size:9px;color:var(--text3)}.frv{font-size:14px;font-weight:700;color:var(--pink)}
+.rpips{display:flex;gap:2px;margin-top:4px}.rpip{height:3px;flex:1;background:var(--bg4);border-radius:2px}.rpip.on{background:var(--pink)}
+.fbtns{display:flex;gap:4px;margin-top:7px}
+.fbtn{flex:1;padding:3px 0;background:var(--bg4);border:.5px solid var(--border);border-radius:4px;color:var(--text2);font-size:11px;cursor:pointer;text-align:center;transition:all .12s}
+.fbtn:hover{border-color:var(--border2);color:var(--text)}
+.sbar{width:100%;padding:8px 12px;background:var(--bg3);border:.5px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;margin-bottom:12px}
+.sbar:focus{border-color:var(--purple2)}
+.dge{margin-bottom:20px}.dghd{display:flex;align-items:baseline;gap:8px;margin-bottom:5px}
+.dgn{font-size:14px;font-weight:600;color:var(--text)}.dgm{font-size:10px;color:var(--red)}.dgs{font-size:10px;color:var(--blue)}.dgu{font-size:10px;color:var(--text3)}
+.sep{height:.5px;background:var(--border);margin-top:18px}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="hl"><span class="crown">&#9819;</span><div><h1>Metaphor: ReFantazio &#8212; 100% Walkthrough</h1><div class="header-sub">Interactive guide &#183; Source: PowerPyx (ObsiEez, Monomaru, LuckySlime)</div></div></div>
+    <button class="bsm" onclick="resetAll()">Reset All</button>
+  </div>
+  <div class="stats-row">
+    <div class="sc beetles" onclick="openTab('beetles')"><div class="sl">Gold Beetles</div><div class="sv" id="s-b">0</div><div class="ss">of 50 collected</div></div>
+    <div class="sc days"><div class="sl">Days Done</div><div class="sv" id="s-d">0</div><div class="ss" id="s-ds">of — total</div></div>
+    <div class="sc trophies" onclick="openTab('trophies')"><div class="sl">Trophies</div><div class="sv" id="s-t">0/44</div><div class="ss">unlocked</div></div>
+    <div class="sc tasks"><div class="sl">Tasks Done</div><div class="sv" id="s-tk">0</div><div class="ss" id="s-tks">of — total</div></div>
+  </div>
+  <div class="nav">
+    <button class="nb active" id="tab-guide" onclick="openTab('guide')">&#128197; Daily Guide</button>
+    <button class="nb" id="tab-dungeons" onclick="openTab('dungeons')">&#9876; Dungeons &amp; Enemies</button>
+    <button class="nb" id="tab-virtues" onclick="openTab('virtues')">&#10024; Royal Virtues</button>
+    <button class="nb" id="tab-beetles" onclick="openTab('beetles')">🪲 Gold Beetles</button>
+    <button class="nb" id="tab-followers" onclick="openTab('followers')">&#128101; Followers</button>
+    <button class="nb" id="tab-trophies" onclick="openTab('trophies')">&#127942; Trophies</button>
+  </div>
+  <div id="cov" class="cov" onclick="if(event.target===this)closeCal()"><div id="cmod" class="cmod"></div></div>
+  <div id="mc"></div>
+</div>
+<script>
+
+
+const DAYS=[
+{d:"06/02",tasks:[
+{p:"story",t:"Grand Trad, Recruitment Center \u2013 Once you start your interview, you'll be given 5 choices. Depending on your choice, you'll gain extra skills points for specific skills. Choosing one of the dialogues will give you an increase in the following skills in order of appearance: Strength, Magic, Endurance, Agility, Luck. You can choose whichever one you want."}]},
+{d:"06/03",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/04",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/05",tasks:[
+{p:"afternoon",t:"Earn 🏆 Stunning! on the very first enemy encounter.",trophy:1},
+{p:"afternoon",t:"Earn 🏆 Allies United after defeating the boss.",trophy:1},
+{p:"night",t:"Once you're at the camp, pick up the Gold Beetle under one of the trees behind where Strohl is. This is highly missable as you cannot come back to this area after this night. (1/50)",beetle:1,missable:1},
+{p:"night",t:"Earn 🏆 Shake on It after unlocking your first Follower.",trophy:1}]},
+{d:"06/06",tasks:[
+{p:"afternoon",t:"Towards the end of the Nord Mines, there will be a dragon you can sneak past. If you're feeling up to it, you can battle the dragon which will reward you with a weapon for the Warrior class. You cannot come back to this dungeon, so this is your only chance to get it if you want it. The dragon is weak to ice, so try to get at least 2 characters with Mage Rank 2 so you can spam ice attacks. Try not to use any of your MP recharging items during this fight if you can, as you'll need them for the first main dungeon, though it isn't the end of the world if you use a couple.",missable:1,dungeon:"Nord Mines"},
+{p:"afternoon",t:"Earn 🏆 Out of the Fire after completing the Nord Mines.",trophy:1}]},
+{d:"06/07",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/08",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/09",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/10",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/11",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Collect the Gold Beetle behind the stairs leading to Comfort Concoctions. (2/50)",beetle:2},
+{p:"afternoon",t:"Grand Trad, Comfort Concoctions \u2013 Collect the Gold Beetle by choosing to stick your hand in the sack of spices near the door. (3/50)",beetle:3},
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Talk to More to visit Akademia, then accept the side quest \"More's Task: Foreword and Prologue\".",quest:1},
+{p:"afternoon",t:"Progress the story and once you reach the boss fight, use a Synthesis skill to earn 🏆 United Front.",trophy:1}]},
+{d:"06/12",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Accept the side quest \"Pagan's Dilemma\" from the Mustari Man. Go to St. Fermis Church to buy the Breath of Fresh Air and turn in the side quest. (+4 Tolerance)",quest:1},
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Give the Man in Pain a Medical Herb."},
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Accept the side quest \"Help the Hushed Honeybee\" from the Young Nidia Man.",quest:1},
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Collect the Gold Beetle in the corner of the hallway. (4/50)",beetle:4},
+{p:"afternoon",t:"Grand Trad, Regalith Grand Cathedral \u2013 Talk to the Water Merchant and purchase the 3 Fruit Cordial she's selling. This will be very useful for the upcoming dungeon."},
+{p:"afternoon",t:"Grand Trad, Catacombs Entrance \u2013 Enter the dungeon. We're aiming to complete the dungeon within a single day, which would be nearly impossible if not for the Mage's Magic Recovery passive that lets you regain 1 MP for your entire party every time an enemy is stunned/defeated on the field as long as its equipped to the Main Character. The dungeon is very long and with a very small MP pool, you'll run out quickly. Thankfully that skill combined with the enemies that infinitely spawn from the Trance Crystals in the second part of the dungeon, you basically have infinite MP. While you're grinding at the Trance Crystals to regain MP, be careful of the Mage's Area of Effect basic attack that will also damage the Trance Crystal. If you find the Trance Crystal getting low HP, enter the Magla Hollow and exit it to reset its HP back to full.",dungeon:"Catacombs"},
+{p:"afternoon",t:"While in the dungeon, try to get the Healer Archetype to Rank 10, so you can turn in the quest \"More's Task: Foreword and Prologue\" and accept \"More's Task Chapter One: Ordeal\" to progress his follower rank. (Rank 2) (+4 Imagination)",follower:"More",rank:2,quest:1},
+{p:"afternoon",t:"Once you reach the end of the dungeon and defeat the boss, you'll unlock 🏆 Calamity Averted.",trophy:1}]},
+{d:"06/13",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Accept the bounty \"Man's Not-So Best Friend\"."},
+{p:"afternoon",t:"Spend time with Hulkenberg. (Rank 2)",follower:"Hulkenberg",rank:2},
+{p:"night",t:"Grand Trad, Sunshade Row \u2013 Buy information from the Informant. Specifically the Secret of the Redgrass Shop so you can purchase Redgrass."},
+{p:"night",t:"Grand Trad, Hushed Honeybee Inn \u2013 Cook with Fabienne. The dialogue you get is random, so make sure to save beforehand until you choose the correct one. (+3 Tolerance)"}]},
+{d:"06/14",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Turn in the side quest \"Help the Hushed Honeybee\". (+4 Wisdom)",quest:1},
+{p:"afternoon",t:"Spend time with Strohl. (Rank 2)",follower:"Strohl",rank:2},
+{p:"night",t:"Grand Trad, Sunlumeo Street \u2013 Gaze at the view of the Royal Capital. (+2 Wisdom. Rank 2 Wisdom)"}]},
+{d:"06/15",tasks:[
+{p:"afternoon",t:"Grand Trad, Regalith Grand Cathedral \u2013 Buy some Pristine Clear Water, Bidou Meat, and Redgrass. This will also unlock 🏆 Shrewd Shopper.",trophy:1},
+{p:"afternoon",t:"Grand Trad, St. Fermis Church \u2013 With Rank 2 Wisdom, you can now purify an item to unlock 🏆 Blessed Power.",trophy:1},
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Accept the side quest \"A Bullish Embargo\" from the Igniter Merchantess. Requires Rank 2 Wisdom in order to accept.",quest:1},
+{p:"afternoon",t:"Exit out the front gate to travel to Belega Corridor."},
+{p:"afternoon",t:"Belega Corridor \u2013 Collect the Gold Beetle on floor B3, by going through the tunnel on the left side of the big open room. (5/50)",beetle:5,dungeon:"Belega Corridor"},
+{p:"afternoon",t:"Belega Corridor \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Belega Corridor"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"06/16",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Turn in the side quest \"A Bullish Embargo\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Turning in the quest will automatically make you spend time with Brigitta. (Rank 1)",follower:"Brigitta",rank:1},
+{p:"night",t:"Grand Trad, Hushed Honeybee Inn \u2013 Make Redgrass-Roasted Bidou with Fabienne. Choose option 2 for maximum points. (+3 Tolerance)"}]},
+{d:"06/17",tasks:[
+{p:"afternoon",t:"Spend time with Strohl. (Rank 3)",follower:"Strohl",rank:3},
+{p:"night",t:"Grand Trad, Hushed Honeybee Inn \u2013 Cook with Fabienne. The dialogue you get is random, so make sure to save beforehand until you choose the correct one. (+3 Tolerance)"}]},
+{d:"06/18",tasks:[
+{p:"afternoon",t:"Exit out the front gate to travel to Tradia Desert."},
+{p:"afternoon",t:"Tradia Desert \u2013 Collect the Gold Beetle located in the bush near a rock to the left of where you start. (6/50)",beetle:6,dungeon:"Tradia Desert"},
+{p:"afternoon",t:"Tradia Desert \u2013 You can now loot everything, then complete the objective to beat the boss here.",dungeon:"Tradia Desert"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"06/19",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Turn in the bounty \"Man's Not-So Best Friend\", which will unlock 🏆 Monster Hunter. (+4 Courage)",trophy:1,quest:1},
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Spend time with the Chatty Elder. (+2 Imagination)"},
+{p:"night",t:"Spend time with Brigitta. (Rank 2)",follower:"Brigitta",rank:2}]},
+{d:"06/20",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Spend time with the Chatty Elder. (+2 Imagination)"},
+{p:"night",t:"Grand Trad, Hushed Honeybee Inn \u2013 Cook with Fabienne. The dialogue you get is random, so make sure to save beforehand until you choose the correct one. (+3 Tolerance. Rank 2 Tolerance)"}]},
+{d:"06/21",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Spend time with the Activist Woman. (+2 Eloquence)"},
+{p:"night",t:"Spend time with Brigitta. (Rank 3)",follower:"Brigitta",rank:3}]},
+{d:"06/22",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/23",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/24",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 After checking the engine, interact with the Cooking Table to collect new recipes. You won't actually be cooking for awhile, however."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Enter the pantry for free cooking ingredients. You'll be able to do this every day from this point on, including on days when you aren't traveling. Make sure to check the pantry every single day from this point on as it will give you unique ingredients you can't get elsewhere like the Gauntlet Shroom, or give you early access to some ingredients. The guide will not constantly remind you to do this.",missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. Choose 1, 3, 1 for maximum points. (+4 Imagination)"},
+{p:"night",t:"Gauntlet Runner \u2013 Interact with the campfire to get a cooking item. You'll be able to do this every night you're camped out on your Gauntlet Runner. This will give you unique ingredients you won't be able to purchase until very late into the game, so make sure you're checking this every night you're camped out on the Gauntlet Runner. The guide will not constantly remind you to do this.",missable:1},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. Choose 2 for maximum points. (+4 Imagination)"}]},
+{d:"06/25",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Use the Toilet on Idlesday (Any day ending in 5 or 0) to get +1 in your Luck stat. You'll want to do this every single Idlesday if you want to maximize your skill points. The guide will not constantly remind you to do this.",missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading New World Travel Diary. Choose 1 for maximum points. (+8 Imagination. Rank 2 Imagination)"},
+{p:"afternoon",t:"During a story event, you'll get the Tree of Prophecy Drawing. (+4 Wisdom)"},
+{p:"night",t:"Gauntlet Runner \u2013 Spend time with Neuras. Choose 3 for maximum points. (+4 Wisdom)",follower:"Neuras",rank:1}]},
+{d:"06/26",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/27",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/28",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"06/29",tasks:[
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Buy the 3 Mellow Milk and the 3 Fruit Cordial from the Water Trader."},
+{p:"afternoon",t:"Martira, Stairstone Market \u2013 Buy some Mora Coney Meat from the Hardy Butcher."},
+{p:"afternoon",t:"Martira, Cattleracket Road \u2013 Buy some Rockbeans and Fragrant Spice from the Greengrocer Girl."},
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Accept the side quest \"A Dagger, a Ring, and a Rake\" from the Pompous Man. Requires Rank 2 Imagination in order to accept it.",quest:1},
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Accept the side quest \"Hatching a Plan\" from the Gloomy Youth.",quest:1},
+{p:"afternoon",t:"Martira, Recruitment Center \u2013 Accept the bounty \"The New King of the Imps\"."},
+{p:"afternoon",t:"Martira, Visca Alba Tavern \u2013 Interact with the fireplace to find a Gold Beetle. (7/50)",beetle:7},
+{p:"afternoon",t:"Martira, Visca Alba Tavern \u2013 Go into the Inn room and interact with the water jug to find a Gold Beetle. This seems to be a random drop, as you might get MAG or Reeve instead. Keep interacting with it every day until you get the Gold Beetle, or you can save before interacting with it and keep reloading your save. (8/50)",beetle:8,missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Imp's Den. Once traveling, spend time with Hulkenberg. (Rank 3)",follower:"Hulkenberg",rank:3},
+{p:"afternoon",t:"Imp's Den \u2013 Collect the Gold Beetle in the very north area of the map. (9/50)",beetle:9,dungeon:"Imp's Den"},
+{p:"afternoon",t:"Imp's Den \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Imp's Den"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"06/30",tasks:[
+{p:"afternoon",t:"Martira, Recruitment Center \u2013 Turn in the side quest \"The New King of Imps\". (+4 Courage. Rank 2 Courage)",quest:1},
+{p:"afternoon",t:"Grand Trad, Hushed Honeybee Inn \u2013 Turn in the side quest \"Promising Returns\".",quest:1},
+{p:"afternoon",t:"Spend time with Maria. Requires Rank 2 Tolerance. (Rank 2)",follower:"Maria",rank:2},
+{p:"night",t:"Spend time with Brigitta. (Rank 4)",follower:"Brigitta",rank:4}]},
+{d:"07/01",tasks:[
+{p:"afternoon",t:"Spend time with Hulkenberg. (Rank 4)",follower:"Hulkenberg",rank:4},
+{p:"night",t:"Martira, Thoroughfare Square \u2013 Make a back up save, and then talk to the Spirited Youth to take the plunge. If you don't get 4 courage, reload your save and try again as there is a chance to fail the plunge. (+4 Courage)"}]},
+{d:"07/02",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Giant Sandworm Nest. While traveling read Pride and Persuasion. Choose 2 for maximum points. (+4 Eloquence)"},
+{p:"afternoon",t:"During a story event, you'll get the Midnight Sunsands Drawing. (+4 Wisdom)"},
+{p:"afternoon",t:"During another story event, you'll battle Catherina. (Rank 2)",follower:"Catherina",rank:2},
+{p:"night",t:"Spend time with Neuras. (+4 Wisdom)",follower:"Neuras",rank:2}]},
+{d:"07/03",tasks:[
+{p:"afternoon",t:"You'll enter the Sandworm dungeon. You cannot come back to this area, so make sure to grab everything you can before reaching the exit.",dungeon:"Giant Sandworm's Nest",missable:1}]},
+{d:"07/04",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"07/05",tasks:[
+{p:"afternoon",t:"Martira, Recruitment Center \u2013 Accept the bounty \"The Man-Eater in the Mine\"."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 You can now use the Washroom on the Gauntlet Runner for some free EXP everyday. The guide will not constantly remind you to do this.",missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Interact with the Cooking Table to get new recipes."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to Man-Eater's Grotto. While traveling read Pride and Persuasion. Choose 3 for maximum points. (+4 Eloquence)"},
+{p:"afternoon",t:"Komero \u2013 You'll want to make sure you stop at Komero and you'll automatically complete the side quest \"Providing a Spark\", and accept the side quest \"Relic Search: Inventor's Bequest\". This will also unlock Neuras as a follower. (Rank 1)",quest:1,follower:"Neuras",rank:1},
+{p:"afternoon",t:"Komero \u2013 Buy the Practical Pigeon Parcel, as well as some Orgo Sugar, then continue your trip."},
+{p:"afternoon",t:"Man-Eater's Grotto \u2013 At the very start, talk to More and go to Akademia. Study the Gunner Archetype and the Merchant Archetype, and then turn in the side quest \"More's Task Chapter One: Ordeal\" and accept \"More's Task Chapter Two: Solitude\". (Rank 3) (+4 Imagination)",follower:"More",rank:3,quest:1,dungeon:"Man-Eater's Grotto"},
+{p:"afternoon",t:"Man-Eater's Grotto \u2013 During the dungeon you'll want to steal from an enemy in order to unlock 🏆 What's Yours is Mine. Steal is an extremely useful skill that can get you rare items and equipment that can be helpful. It's always recommended to try and steal from new enemies whenever you come across them, and use R3 to restart the battle if you fail to steal. The guide will not constantly remind you to steal from enemies that give you useful items.",trophy:1,dungeon:"Man-Eater's Grotto"},
+{p:"afternoon",t:"Man-Eater's Grotto \u2013 Follow the path near the Talkative Tooth to find a chest with a Screwed-Up Material for Neuras.",dungeon:"Man-Eater's Grotto"},
+{p:"afternoon",t:"Man-Eater's Grotto \u2013 Collect the Gold Beetle on the bottom floor, near the 2 staircases to the north. (10/50)",beetle:10,dungeon:"Man-Eater's Grotto"},
+{p:"afternoon",t:"Man-Eater's Grotto \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Man-Eater's Grotto"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"07/06",tasks:[
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Turn in the side quest \"Hatching a Plan\".",quest:1},
+{p:"afternoon",t:"Martira, Recruitment Center \u2013 Turn in the bounty \"The Man-Eater in the Mine\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Spend time with Maria. (Rank 3)",follower:"Maria",rank:3},
+{p:"night",t:"Martira, Stairstone Market \u2013 Debate Loveless at the podium. Choose option 2 to win the debate. (+4 Eloquence, +1 Imagination)"}]},
+{d:"07/07",tasks:[
+{p:"afternoon",t:"Martira, Stairstone Market \u2013 Debate Lina at the podium. Choose option 1 to win the debate. (+4 Eloquence, +1 Imagination. Rank 2 Eloquence)"},
+{p:"night",t:"Spend time with Neuras. This will complete the side quest \"Relic Search: Inventor's Bequest\" and start \"Relic Search: Dregs of Destiny\". (Rank 2)",follower:"Neuras",rank:2,quest:1}]},
+{d:"07/08",tasks:[
+{p:"afternoon",t:"Martira, Blind Well Alley \u2013 Enter the dungeon. This dungeon isn't nearly as long as the first dungeon so MP isn't as big of an issue, but you should still try and use it sparingly since we want to complete the dungeon in one go. A good idea might be to level up the Thief archetype on every character to level 11 so you can unlock Plunder Magic and use skill inheritance to have it on everyone, so you can always steal MP whenever you're low instead of just relying on the Mage's Magic Recovery skill.",dungeon:"Blind Well Alley"},
+{p:"afternoon",t:"Throughout the dungeon you'll have to sneak past a specific enemy. You can fight them, but it isn't worth it as you don't get any special rewards for beating them."},
+{p:"afternoon",t:"You'll also want to get the Merchant Archetype to rank 15 so you can turn in the side quest \"More's Task Chapter Two: Solitude\" and accept \"More's Task Chapter Three: Drifting\". (Rank 4) (+4 Imagination)",follower:"More",rank:4,quest:1},
+{p:"afternoon",t:"After defeating the boss of the dungeon, you'll unlock 🏆 Dark Truths.",trophy:1,dungeon:"Blind Well Alley"},
+{p:"afternoon",t:"You'll automatically turn in the bounty quest \"The Old Castle Town Kidnapper\". (+4 Courage)",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"07/09",tasks:[
+{p:"afternoon",t:"Martira, Visca Alba Tavern \u2013 Accept the side quest \"The Queen of Cuisine: Heart\".",quest:1},
+{p:"afternoon",t:"Spend time with Maria. (Rank 4)",follower:"Maria",rank:4},
+{p:"night",t:"Martira, Stairstone Market \u2013 Debate Roger at the podium. Choose option 3 to win the debate. (+4 Eloquence, +1 Imagination)"}]},
+{d:"07/10",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Abandoned Tomb."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 With Maria now at Rank 4, you can now cook without using any time, so cook Benevolent Bread."},
+{p:"afternoon",t:"Spend time with Strohl. (Rank 4)",follower:"Strohl",rank:4},
+{p:"night",t:"Spend time with Hulkenberg. (Rank 5)",follower:"Hulkenberg",rank:5}]},
+{d:"07/11",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Redgrass-Roasted Bidou."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading Pride and Persuasion. Choose 1 for maximum points. (+8 Eloquence)"},
+{p:"afternoon",t:"Abandoned Tomb \u2013 Collect the Gold Beetle on floor B2 by following the ladders. (11/50)",beetle:11,dungeon:"Abandoned Tomb"},
+{p:"afternoon",t:"Abandoned Tomb \u2013 You can now loot everything, then complete the objective here and return to town.",dungeon:"Abandoned Tomb"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"07/12",tasks:[
+{p:"afternoon",t:"Martira, Visca Alba Tavern \u2013 Turn in the side quest \"The Queen of Cuisine: Heart\" by giving her the Benevolent Bread you made.",quest:1},
+{p:"afternoon",t:"Spend time with Maria. (Rank 5)",follower:"Maria",rank:5},
+{p:"night",t:"Spend time with Heismay. Requires Rank 2 Eloquence. (Rank 2)",follower:"Heismay",rank:2}]},
+{d:"07/13",tasks:[
+{p:"afternoon",t:"Spend time with Strohl. You'll accept the side quest \"A Noble's Legacy\". (Rank 5)",follower:"Strohl",rank:5,quest:1},
+{p:"night",t:"Martira, Thoroughfare Square \u2013 Turn in the side quest \"A Dagger, a Ring, and a Rake\". (+4 Courage)",quest:1},
+{p:"night",t:"You'll automatically spend time with Cuculus after turning in the quest. (Rank 1)",follower:"Cuculus",rank:1}]},
+{d:"07/14",tasks:[
+{p:"afternoon",t:"Spend time with Heismay. (Rank 3)",follower:"Heismay",rank:3},
+{p:"night",t:"Martira, Thoroughfare Square \u2013 Make a back up save, and then talk to the Spirited Youth to take the plunge. If you don't get 4 courage, reload your save and try again. (+4 Courage)"}]},
+{d:"07/15",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Accept the side quest \"A Haunted Heirloom\" from the Resentful Noble.",quest:1},
+{p:"afternoon",t:"Grand Trad, Catacombs Entrance \u2013 Accept the side quest \"Skullduggery\" from the Nervous Soldier.",quest:1},
+{p:"afternoon",t:"Grand Trad, Catacombs Entrance \u2013 Enter the dungeon and make your way through the newly opened doors in the Mausoleum. At the end you'll get the Black Jewel Necklace, and you should have gotten 8 Mortaskulls in the process. Once those are done, you can leave the dungeon.",dungeon:"Catacombs"},
+{p:"afternoon",t:"You'll be able to turn in the quest \"Skullduggery\" as soon as you exit the dungeon.",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"07/16",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Turn in the side quest \"Haunted Heirloom\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Make a save and then talk to the Spirited Youth to take the plunge. This will unlock 🏆 At Your Own Risk. You can then reload your save so you don't waste any time. If you didn't unlock the trophy, reload and try again.",trophy:1},
+{p:"afternoon",t:"Spend time with Maria. (Rank 6)",follower:"Maria",rank:6},
+{p:"night",t:"Spend time with Heismay. (Rank 4)",follower:"Heismay",rank:4}]},
+{d:"07/17",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Curative Coney Roast."},
+{p:"afternoon",t:"Spend time with Strohl. (+4 Courage. Rank 3 Courage)",follower:"Strohl",rank:6},
+{p:"night",t:"Gauntlet Runner \u2013 Cook Critical Meatballs."},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"}]},
+{d:"07/18",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Invincible Noodles."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"},
+{p:"afternoon",t:"During a story event, you'll get the City Ruins Drawing. (+4 Wisdom)"},
+{p:"night",t:"Gauntlet Runner \u2013 Cook Magical Bread."},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading Bygone Days. (+8 Tolerance)"}]},
+{d:"07/19",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Coney Stew. You might not have the Briny Salt yet since the only way to get it at the moment is through the Pantry. If not, you can just cook this later."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. (+4 Imagination)"},
+{p:"afternoon",t:"You'll have another forced battle with Catherina. (Rank 3)",follower:"Catherina",rank:3},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. (+4 Imagination)"}]},
+{d:"07/20",tasks:[
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Collect the Gold Beetle near the dock. (12/50)",beetle:12},
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Collect the Gold Beetle at the dead end in the alleyway. (13/50)",beetle:13},
+{p:"afternoon",t:"Brilehaven, Merchants' Bazaar \u2013 Collect the Gold Beetle in the small alley near the Black Cat's Crow. (14/50)",beetle:14},
+{p:"afternoon",t:"Brilehaven, Merchants' Bazaar \u2013 Collect the Gold Beetle in the corner by the Recruitment Center. (15/50)",beetle:15},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 Collect the Gold Beetle in the top right corner of the area, by the boxes. (16/50)",beetle:16},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 Talk to the Elderly Entomophile. You can now turn in Gold Beetles in exchange for items to him."},
+{p:"afternoon",t:"Brilehaven, Merchants' Bazaar \u2013 Buy some Briny Salt from the Water Merchant, and some Marbled Bluefin Tuna from The Ruffian's Reel."},
+{p:"afternoon",t:"Once you're done with everything, you can progress the story."}]},
+{d:"07/21",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"07/22",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"07/23",tasks:[
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Accept the side quest \"Efflorescent Youth\" from the Kindly Boy. You can then go to St. Fermis Church to buy the Rainbow Flower and turn the quest in. (+4 Tolerance)",quest:1},
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Accept the side quest \"Dental Distress\" from the Sullen Man.",quest:1},
+{p:"afternoon",t:"Brilehaven, Merchants' Bazaar \u2013 Accept the side quest \"Superior Scrimshaw\" from the Craftsman. Make sure you visit the informant after accepting the quest to buy Fiend of the Forsaken Tower in order to actually mark the Forsaken Tower on the map.",quest:1},
+{p:"afternoon",t:"Brilehaven, Recruitment Center \u2013 Accept the bounty \"Grieving Ghost of the Goblet\"."},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 Give the Man in Pain a Medical Herb. This gives you a thing of Tail Bait, which we'll need later."},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 Accept the side quest \"The Chalice vs. The Brew\" from the Brewer.",quest:1},
+{p:"afternoon",t:"Brilehaven, Nightprowler \u2013 Accept the side quest \"Deeds and Diversions\" from the Overfamiliar Man.",quest:1},
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Talk to Julian to get The Future of Magic book. This is highly missable as once you're finished with this area and start going to the next area, Julian will no longer be here to give you the book.",missable:1},
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Accept the side quest \"Soldier's Solace\" from the Exhausted Woman.",quest:1},
+{p:"afternoon",t:"Martira, Thoroughfare Square \u2013 Talk to Bardon and spend time with him. (Rank 1)",follower:"Bardon",rank:1},
+{p:"night",t:"Brilehaven, Merchants' Bazaar \u2013 Debate Jin at the podium. Choose option 2 to win the debate. (+5 Eloquence, +1 Imagination. Rank 3 Eloquence, Rank 3 Imagination)"}]},
+{d:"07/24",tasks:[
+{p:"afternoon",t:"Grand Trad, Regalith Grand Cathedral \u2013 Go complete the side quest \"A Noble's Legacy\". This requires Rank 3 Imagination to do.",quest:1},
+{p:"afternoon",t:"Spend time with Strohl to turn in the quest. (Rank 6) (+4 Tolerance. Rank 3 Tolerance)",follower:"Strohl",rank:7},
+{p:"night",t:"Brilehaven, Merchants' Bazaar \u2013 Debate Glodell at the podium. Choose option 3 to win the debate. (+5 Eloquence, +1 Imagination)"}]},
+{d:"07/25",tasks:[
+{p:"afternoon",t:"Spend time with Bardon. (Rank 2)",follower:"Bardon",rank:2},
+{p:"night",t:"Spend time with Brigitta. Requires Rank 3 Courage. (Rank 5)",follower:"Brigitta",rank:5}]},
+{d:"07/26",tasks:[
+{p:"afternoon",t:"Spend time with Strohl. (Rank 7)",follower:"Strohl",rank:7},
+{p:"night",t:"Brilehaven, Merchants' Bazaar \u2013 Debate Rudolf at the podium. Choose option 3 to win the debate. (+5 Eloquence, +1 Imagination)"}]},
+{d:"07/27",tasks:[
+{p:"afternoon",t:"There will be a big sale today, so if you wanted to buy any weapons, armor, or anything else, now would be a good time."},
+{p:"afternoon",t:"Spend time with Bardon. (Rank 3)",follower:"Bardon",rank:3},
+{p:"night",t:"Brilehaven, Merchants' Bazaar \u2013 Debate Milo at the podium. Choose option 1 to win the debate. (+5 Eloquence, +1 Imagination)"}]},
+{d:"07/28",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Tomb of Lament, making sure you choose the path on the left that goes through Inundo as we need to stop there."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook the Coney Stew if you couldn't before. We can't cook any actual new recipes at the moment."},
+{p:"afternoon",t:"Spend time with Hulkenberg. (Rank 6)",follower:"Hulkenberg",rank:6},
+{p:"afternoon",t:"Inundo \u2013 Buy the Toothbrush of Hygienia. You should also buy more Mellow Milk here. You can then continue your trip."},
+{p:"night",t:"Spend time with Heismay. (Rank 5)",follower:"Heismay",rank:5}]},
+{d:"07/29",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. Choose 2 for maximum points. (+4 Wisdom)"},
+{p:"afternoon",t:"During an event you'll get the Peregrine Falls Drawing. (+4 Wisdom. Rank 3 Wisdom)"},
+{p:"afternoon",t:"Tomb of Lament \u2013 On the bottom floor, there will be a hole in the wall you can crawl through to get the Gypsum Crystal for Neuras.",dungeon:"Tomb of Lament"},
+{p:"afternoon",t:"Tomb of Lament \u2013 Once you reach the second half of the bottom floor, there will be a hole you can crawl through that leads to a Gold Beetle. (17/50)",beetle:17,dungeon:"Tomb of Lament"},
+{p:"afternoon",t:"Tomb of Lament \u2013 Once you reach the end of the dungeon, there will be a hole in the wall leading to another Gold Beetle. (18/50)",beetle:18,dungeon:"Tomb of Lament"},
+{p:"afternoon",t:"Tomb of Lament \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and instead of returning to town, set up camp instead and choose to go somewhere else.",dungeon:"Tomb of Lament"},
+{p:"night",t:"Spend time with Neuras. You'll turn in the side quest \"Relic Search: Dregs of Destiny\" and accept the side quest \"Relic Search: Youth's Folly\". (Rank 3)",follower:"Neuras",rank:3,quest:1}]},
+{d:"07/30",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to Gracia Forest."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Steadfast Stew."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. Choose 2 for maximum points. (+4 Wisdom)"},
+{p:"afternoon",t:"Gracia Forest \u2013 There will be a Gold Beetle in the North-East most corner of the map. (19/50)",beetle:19,dungeon:"Gracia Forest"},
+{p:"afternoon",t:"Gracia Forest \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and instead of returning to town, set up camp instead and choose to go somewhere else.",dungeon:"Gracia Forest"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading The Future of Magic. Choose 3 for maximum points. (+8 Wisdom)"}]},
+{d:"08/01",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Forsaken Tower. It doesn't matter which path you take. If you go the left path however, make sure you don't stop at the Tomb of Lament."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"}]},
+{d:"08/02",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"},
+{p:"afternoon",t:"You'll then have a battle with Catherina. (Rank 4)",follower:"Catherina",rank:4},
+{p:"afternoon",t:"Forsaken Tower \u2013 There will be a Gold Beetle on the 5th Floor. (20/50)",beetle:20,dungeon:"Forsaken Tower"},
+{p:"afternoon",t:"Forsaken Tower \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Forsaken Tower"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"08/03",tasks:[
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Turn in the side quest \"Soldier's Solace\".",quest:1},
+{p:"afternoon",t:"Brilehaven, Merchants' Bazaar \u2013 Turn in the side quest \"Superior Scrimshaw\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Turn in the side quest \"Dental Distress\", which will reward you with a Gold Beetle. (21/50)",beetle:21,quest:1},
+{p:"afternoon",t:"Brilehaven, Seabreeze Street \u2013 Talk to the Troubled Old Man and answer his questions."},
+{p:"afternoon",t:"Brilehaven, Recruitment Center \u2013 Turn in the side quest \"Grieving Ghost of the Goblet\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 Turn in the side quest \"Chalice Vs. The Brew\".",quest:1},
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Pompous Noble and tell him about the Forsaken Tower, then go turn in the side quest \"Deeds and Diversions\".",quest:1},
+{p:"afternoon",t:"Brilehaven, Warship Harbor, Charadrius \u2013 Enter the dungeon. The dungeon itself is pretty short and is mostly just a string of boss fights, however you need to defeat them in 3 turns or less. Halfway through the dungeon you'll have a choice between going to the Port Corridor or the Starboard Corridor. It doesn't matter which one you choose to go down and even though you get a unique quest at the end of each corridor, they don't count towards completing all Side Quests, so the only reason to backtrack to the other path is for a few extra items and experience.",dungeon:"Skyrunner Charadrius"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"08/04",tasks:[
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Talk to More and go to Akademia. You should have studied 15 different Archetypes by now, so you can turn in \"More's Task Chapter Three: Drifting\" and accept \"More's Task Chapter Four: Turmoil\". (Rank 5) (+4 Imagination)",follower:"More",rank:5,quest:1},
+{p:"afternoon",t:"Spend time with Bardon. (Rank 4)",follower:"Bardon",rank:4},
+{p:"night",t:"Spend time with Heismay. (Rank 6)",follower:"Heismay",rank:6}]},
+{d:"08/05",tasks:[
+{p:"afternoon",t:"Spend time with Strohl. (Rank 8)",follower:"Strohl",rank:8},
+{p:"night",t:"Spend time with Alonzo. Requires Rank 3 Wisdom. (Rank 2)",follower:"Alonzo",rank:2}]},
+{d:"08/06",tasks:[
+{p:"afternoon",t:"Spend time with Bardon. Requires Rank 3 Eloquence. (Rank 5)",follower:"Bardon",rank:5},
+{p:"night",t:"Spend time with Brigitta. (Rank 6)",follower:"Brigitta",rank:6}]},
+{d:"08/07",tasks:[
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Spend time with the Earnest Youth. (+4 Tolerance)"},
+{p:"night",t:"Spend time with Alonzo. (Rank 3)",follower:"Alonzo",rank:3}]},
+{d:"08/08",tasks:[
+{p:"afternoon",t:"Spend time with Bardon. You'll also accept the side quest \"The Right to Rule\". (Rank 6)",follower:"Bardon",rank:6,quest:1},
+{p:"night",t:"Brilehaven, Angler's Inn Square \u2013 Go spend time at the Watchtower. (+4 Wisdom)"}]},
+{d:"08/09",tasks:[
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Spend time with the Earnest Youth. (+4 Tolerance)"},
+{p:"night",t:"Spend time with Alonzo. Requires Rank 3 Tolerance. (Rank 4)",follower:"Alonzo",rank:4}]},
+{d:"08/10",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and accept the side quest \"Defeat the Coliseum Monster\", then talk to him again to fight in the battle and complete the side quest.",quest:1},
+{p:"night",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Bronze 2) (+4 Courage)"}]},
+{d:"08/11",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Bronze 1) (+4 Courage)"},
+{p:"night",t:"Spend time with Alonzo. (Rank 5)",follower:"Alonzo",rank:5}]},
+{d:"08/12",tasks:[
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Spend time with the Earnest Youth. (+4 Tolerance. Rank 4 Tolerance)"},
+{p:"night",t:"Brilehaven, Angler's Inn Square \u2013 Go spend time at the Watchtower. (+4 Wisdom)"}]},
+{d:"08/13",tasks:[
+{p:"afternoon",t:"Nothing but story, but you'll unlock 🏆 On Knife's Edge after defeating the boss.",trophy:1}]},
+{d:"08/14",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the kitchen and interact with the Cooking Table to get new recipes, then cook Cursed Love Ballad."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Top Secret Poetry! Do Not Read!. (+5 Courage)"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Top Secret Poetry! Do Not Read!. (+5 Courage)"}]},
+{d:"08/15",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading Top Secret Poetry! Do Not Read!. (+10 Courage. Rank 4 Courage)"},
+{p:"afternoon",t:"During a story event you'll get the Towering Seawall Drawing. (+4 Wisdom)"}]},
+{d:"08/16",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 You can spend the day with whoever you want. You'll get a special accessory that gives you +5 in all stats no matter who you hang out with, so feel free to choose whoever you like."},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. (+4 Wisdom)"}]},
+{d:"08/17",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"08/18",tasks:[
+{p:"afternoon",t:"Virga Island \u2013 Buy ingredients from the Boastful Shopkeeper."},
+{p:"afternoon",t:"Virga Island \u2013 Buy ingredients from the Water Seller."},
+{p:"afternoon",t:"Virga Island \u2013 Collect the Gold Beetle by the Rooster Inn. (22/50)",beetle:22},
+{p:"afternoon",t:"Virga Island \u2013 Collect the Gold Beetle behind the Golden Deer Hearth. (23/50)",beetle:23},
+{p:"afternoon",t:"Virga Island \u2013 Collect the Gold Beetle on the walkway by the Chief's House. (24/50)",beetle:24},
+{p:"afternoon",t:"Virga Island \u2013 Collect the Gold Beetle on the platform behind the Dragon Statue. (25/50)",beetle:25},
+{p:"afternoon",t:"Virga Island \u2013 Collect the Gold Beetle behind the boxes near the Gauntlet Runner. (26/50)",beetle:26},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Dragon Temple."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Stale Black Beard."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Secret Poetry! Do Not Read! (+5 Courage)"},
+{p:"afternoon",t:"Dragon Temple \u2013 After some story events, you'll automatically leave.",dungeon:"Dragon Temple"}]},
+{d:"08/19",tasks:[
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"Peak Curiosity\" from the Dejected Man. Make sure you visit the informant after accepting the quest to buy Phantom Avian of the Spire in order to actually mark the Spire of Blind Faith on the map.",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"The Price of Hope\" from the Enthusiastic Woman. You can then go to the Lycaon Magic Association in Grand Trad and listen to the Igniter Merchant, then you can turn the quest in.",quest:1},
+{p:"afternoon",t:"Virga Island, Golden Deer Hearth \u2013 Talk to the informant and buy the Secret of the Eugief's Stall, which will let you buy mask pieces from the Eugief in Brilehaven. This is extremely useful as they're difficult to come across certain ones. They cost 25,000 reeve each and he rotates his stock every day. Due to the randomness of the mask drops from enemies, the guide might not line up perfectly with crafting the masks, so if you find yourself lacking the required mask piece you can check the stall to buy any pieces you need whenever he sells them."},
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Accept the bounty \"The Greater One-Eyed Scoundrel\"."},
+{p:"afternoon",t:"Grand Trad, Comfort Concoctions \u2013 Pick up the Gold Beetle behind where the pots used to be. (27/50)",beetle:27},
+{p:"afternoon",t:"Grand Trad, Comfort Concoctions \u2013 Buy the Parchwater from the shop. This is needed to progress the story."},
+{p:"afternoon",t:"Virga Island \u2013 Turn in the main quest \"Ancestral Solution\".",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"A Guiding Gift\" from the Hoarse Fisher-Crone.",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"Save the Mourning Snakes\" from Junah.",quest:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Dragon Temple."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Bygone Days. (+4 Tolerance)"},
+{p:"afternoon",t:"Dragon Temple \u2013 You'll want to collect 3 Polar Stones in the dungeon for one of the side quests. You only need 1, but you get more rewards for collecting all 3. All 3 are located before you find Eupha.",dungeon:"Dragon Temple"},
+{p:"afternoon",t:"Dragon Temple \u2013 You can grind Magla Pills from the Papyrga enemy (the butterfly looking enemy) that spawn at some of the Trance Crystals throughout the dungeon, with the first one being the one next to the very first Magla Hollow.",dungeon:"Dragon Temple"},
+{p:"afternoon",t:"Dragon Temple \u2013 Once you beat the boss at the end of the temple, you'll unlock 🏆 History Untold.",trophy:1,dungeon:"Dragon Temple"},
+{p:"night",t:"Nothing but a story related battle."}]},
+{d:"08/20",tasks:[
+{p:"afternoon",t:"Virga Island \u2013 Turn in the side quest \"A Guiding Gift\".",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"The Trial of Malnova\" from Eupha.",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Talk to the Clumsy Boy beside the well to get a Gold Beetle. (28/50)",beetle:28},
+{p:"afternoon",t:"Virga Island \u2013 Talk to Edeni and use his weather clearing ability at the Land of Ceremony. You don't need to do this if you don't want to as you'll get increased EXP and A-EXP if you don't, but you won't earn extra press turns during battles, so the choice is up to you."},
+{p:"afternoon",t:"Virga Island \u2013 Buy ingredients from the Village Butcher."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to the Land of Ceremony."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Check the Cooking Table for new recipes then Cook Almighty Golden Stew."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Spend time with Eupha. (+6 Imagination)",follower:"Eupha",rank:1},
+{p:"afternoon",t:"During an event you'll get the Prismatic Sea Drawing. (+4 Wisdom)"},
+{p:"night",t:"Gauntlet Runner \u2013 Cook Sweeter than Poison\u2026."},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. (+4 Imagination)"}]},
+{d:"08/21",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Sweeter than Poison\u2026"},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Spend time with Eupha. Choose option 3 for maximum points. (+6 Imagination)",follower:"Eupha",rank:2},
+{p:"afternoon",t:"Land of Ceremony \u2013 Follow the diagonal path on the west side of Floor B2 to find the Mossy Pillar for Neuras.",dungeon:"Land of Ceremony"},
+{p:"afternoon",t:"Land of Ceremony \u2013 Near the end of the dungeon, once you make it back to the first floor, there will be a Gold Beetle in the corner. (29/50)",beetle:29,dungeon:"Land of Ceremony"},
+{p:"afternoon",t:"Land of Ceremony \u2013 You can now loot everything, then defeat the boss at the end of the dungeon, which will complete the side quest \"The Trial of Malnova\" and unlock Eupha as a follower. You can go back to town afterwards. (+4 Wisdom) (Rank 1)",dungeon:"Land of Ceremony",quest:1,follower:"Eupha",rank:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"08/22",tasks:[
+{p:"afternoon",t:"Our main goal is to chart a course to the Spire of Blind Faith, which will always have the Heat weather in affect. Using Edeni's ability here is useless as it will take 4 days to travel there due to stopping at the Orbwise Path, so you'll just have to bear with the loss of extra press turns during battle. The same goes for the Orbwise Path, but that one isn't as big of a deal as it mostly consists of lower level enemies."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for Orbwise Path."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Holistic Whitefish Platter."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read New World Travel Diary. (+4 Imagination. Rank 4 Imagination)"},
+{p:"afternoon",t:"Orbwise Path \u2013 Collect the Gold Beetle on the right side of the first floor. (30/50)",beetle:30,dungeon:"Orbwise Path"},
+{p:"afternoon",t:"Orbwise Path \u2013 Go up the stairs in the north west area of the first floor and collect the Gold Beetle in the corner. (31/50)",beetle:31,dungeon:"Orbwise Path"},
+{p:"afternoon",t:"Orbwise Path \u2013 You can now loot everything, then defeat the boss at the end of the dungeon, which will complete the side quest \"Save the Mourning Snakes\" and unlock Junah as a follower. Afterwards set up camp instead and choose to go somewhere else. (+4 Imagination) (Rank 1)",dungeon:"Orbwise Path",quest:1,follower:"Junah",rank:1},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Pride and Persuasion. (+4 Eloquence. Rank 4 Eloquence)"}]},
+{d:"08/23",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Spire of Blind Faith, making sure to stop at Silento on the way."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Make a backup save and then go fishing using the Tail Bait. The prompt that appears is random, so keep reloading until you catch 1 Lord of the Lake and 2 Queen's Honey Jars at the same time."},
+{p:"afternoon",t:"Silento \u2013 Other than buying some Archetype EXP items, there is nothing to do here as we mostly just stopped here for a trophy later on, so you can leave and continue your journey."},
+{p:"night",t:"Gauntlet Runner \u2013 Cook Secretest of Secrets."},
+{p:"night",t:"Spend time with Neuras. This will complete the side quest \"Relic Search: Youth's Folly\" and start \"Relic Search: Engineer's Destiny\". (Rank 4)",follower:"Neuras",rank:4,quest:1}]},
+{d:"08/24",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. (+4 Wisdom)"},
+{p:"afternoon",t:"During an event you'll get the Sporico Cave Drawing. (+4 Wisdom)"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. (+4 Wisdom)"}]},
+{d:"08/25",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Spend time with Eupha. Choose option 2 for maximum points. (+6 Imagination)",follower:"Eupha",rank:3},
+{p:"afternoon",t:"Spire of Blind Faith \u2013 As mentioned earlier, you'll have to go through the fight with the Heat weather effect, which isn't an issue until the final boss of the area. It's heavily recommended to bring an ally with Dekaja and Dekunda to deal with buffs/debuffs and to keep everyone in the back row the entire fight so the boss doesn't destroy. Having a high defense character spamming Knight's Proclamation is also helpful.",dungeon:"Spire of Blind Faith"},
+{p:"afternoon",t:"Spire of Blind Faith \u2013 Collect the Gold Beetle on the 6th floor. (32/50)",beetle:32,dungeon:"Spire of Blind Faith"},
+{p:"afternoon",t:"Spire of Blind Faith \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Spire of Blind Faith"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"08/26",tasks:[
+{p:"afternoon",t:"Virga Island \u2013 Turn in the side quest \"Peak Curiosity\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Talk to More to visit Akademia. You should have gotten the General Archetype to Rank 15 by now, letting you turn in the side quest \"More's Task Chapter Four: Turmoil\" and accept the side quest \"More's Task Chapter Five: Resolve\". (+4 Imagination) (Rank 6)",follower:"More",rank:6,quest:1},
+{p:"afternoon",t:"Akademia \u2013 Talk to More and go to the special experiments. Craft as many of the Masks and Vessels as you can. Unlocks 🏆 For Science!. Make sure you keep track of the mask materials you need and buy them from the Eugief's Stall whenever you need them. Similarly, you can buy vessel materials from the Boastful Shopkeeper.",trophy:1},
+{p:"afternoon",t:"Spend time with Eupha. (Rank 2)",follower:"Eupha",rank:2},
+{p:"night",t:"Spend time with Junah. (Rank 2)",follower:"Junah",rank:2}]},
+{d:"08/27",tasks:[
+{p:"afternoon",t:"Spend time with Hulkenberg. Requires Rank 4 Wisdom. (Rank 7)",follower:"Hulkenberg",rank:7},
+{p:"night",t:"Spend time with Heismay. Requires Rank 4 Imagination. (Rank 7)",follower:"Heismay",rank:7}]},
+{d:"08/28",tasks:[
+{p:"afternoon",t:"Spend time with Eupha. (Rank 3)",follower:"Eupha",rank:3},
+{p:"night",t:"Spend time with Junah. (Rank 3)",follower:"Junah",rank:3}]},
+{d:"08/29",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to Scoundrel's Hold, making sure to stop at Ligno."},
+{p:"afternoon",t:"Spend time with Hulkenberg. (Rank 8)",follower:"Hulkenberg",rank:8},
+{p:"afternoon",t:"Ligno \u2013 You can buy some pretty useful weapons here, especially for the Masked Dancer. If you have the extra pocket money, it's highly recommended to purchase some stuff here. Afterwards, continue your trip."},
+{p:"night",t:"Spend time with Heismay. (Rank 8)",follower:"Heismay",rank:8}]},
+{d:"08/30",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Pride and Persuasion. (+4 Eloquence)"},
+{p:"afternoon",t:"Scoundrel's Hold \u2013 At the very start of the dungeon, go to your left and go through the hole in the wall to get the Parquet Chest for Neuras.",dungeon:"Scoundrel's Hold"},
+{p:"afternoon",t:"Scoundrel's Hold \u2013 Once you reach the last floor, climb up the ladder to the south and follow the path to a Gold Beetle. (33/50)",beetle:33,dungeon:"Scoundrel's Hold"},
+{p:"afternoon",t:"Scoundrel's Hold \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Scoundrel's Hold"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"09/01",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Turn in the bounty \"The Greater One-Eyed Scoundrel\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Talk to More and go to Akademia. You should have researched 25 different Archetypes by now, so you can turn in \"More's Task Chapter Five: Resolve\" and accept \"More's Task Chapter Six: The End\". (+4 Imagination) (Rank 7)",follower:"More",rank:7,quest:1},
+{p:"afternoon",t:"Spend time with Alonzo. (Rank 6)",follower:"Alonzo",rank:6},
+{p:"night",t:"Grand Trad, Hushed Honeybee Inn \u2013 Make a save and then help Fabienne cook. You'll unlock 🏆 Chef in Training. Afterwards, reload your save so you don't waste any time.",trophy:1},
+{p:"night",t:"Spend time with Junah. (Rank 4)",follower:"Junah",rank:4}]},
+{d:"09/02",tasks:[
+{p:"afternoon",t:"Spend time with Eupha. (Rank 4)",follower:"Eupha",rank:4},
+{p:"night",t:"Spend time with Brigitta. Requires Rank 4 Courage. (Rank 7)",follower:"Brigitta",rank:7}]},
+{d:"09/03",tasks:[
+{p:"afternoon",t:"Spend time with Maria. Requires Rank 4 Tolerance. (Rank 7)",follower:"Maria",rank:7},
+{p:"night",t:"Spend time with Junah. Requires Rank 4 Imagination. (Rank 5)",follower:"Junah",rank:5}]},
+{d:"09/04",tasks:[
+{p:"afternoon",t:"Spend time with Eupha. (Rank 5)",follower:"Eupha",rank:5},
+{p:"night",t:"Spend time with Neuras. This will complete the side quest \"Relic Search: Engineer's Destiny\" and start \"Relic Search: Bitter Memories\". (Rank 5)",follower:"Neuras",rank:5,quest:1}]},
+{d:"09/05",tasks:[
+{p:"afternoon",t:"Spend time with Maria. (Rank 8)",follower:"Maria",rank:8},
+{p:"night",t:"Skipped due to story events."}]},
+{d:"09/06",tasks:[
+{p:"afternoon",t:"You'll be able to spend time with a party member of your choosing. You can pick whoever you want and you'll get a unique weapon for that character's main class type."}]},
+{d:"09/07",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read How to Walk Outside the Island. (+6 Tolerance)"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read How to Walk Outside the Island. (+6 Tolerance)"}]},
+{d:"09/08",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading How to Walk Outside the Island. (+12 Tolerance. Rank 5 Tolerance)"},
+{p:"afternoon",t:"During a story event you'll get the Colerodio Cliff Drawing. (+4 Wisdom)"},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read Pride and Persuasion. (+4 Eloquence)"}]},
+{d:"09/09",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read The Future of Magic. (+4 Wisdom)"},
+{p:"afternoon",t:"During an event you'll get the Murky Graveyard Drawing. (+4 Wisdom)"},
+{p:"night",t:"Altabury Heights, Lunlumo Approach \u2013 Collect the Gold Beetle on the right sidewalk. (34/50)",beetle:34},
+{p:"night",t:"Altabury Heights, Lunlumo Approach \u2013 Collect the Gold Beetle at the bottom of the stairs near the bridge. (35/50)",beetle:35},
+{p:"night",t:"Altabury Heights, Whitepeaks Magic Shop \u2013 Interact with the pot to get a Gold Beetle. (36/50)",beetle:36},
+{p:"night",t:"Altabury Heights, Blue Sky Bridge \u2013 Collect the Gold Beetle by the pillars. (37/50)",beetle:37},
+{p:"night",t:"Altabury Heights, Opera House Square \u2013 Collect the Gold Beetle at the end of the giant bridge. (38/50)",beetle:38},
+{p:"night",t:"You can now progress the story like normal."}]},
+{d:"09/10",tasks:[
+{p:"afternoon",t:"Nothing but story, but you'll unlock 🏆 Mission Accomplished during the scenes.",trophy:1}]},
+{d:"09/11",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"09/12",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"09/13",tasks:[
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Talk to Loveless to mark his Gauntlet Runner on the map."},
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Talk to Rudolf to mark his Gauntlet Runner on the map."},
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Buy ingredients from the Dedicated Butcher."},
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Accept the side quest \"Warmth in Winter\" from the Portly Man.",quest:1},
+{p:"afternoon",t:"Altabury Heights, Opera House Square \u2013 Accept the side quest \"Proof of Power\" from the Obsessive Soldier. Make sure you visit the informant after accepting the quest to buy Giant of the Tower of Insolence in order to actually mark the Tower of Insolence on the map.",quest:1},
+{p:"afternoon",t:"Altabury Heights, Recruitment Center \u2013 Accept the bounty \"The Fiend in the Frozen Forest\"."},
+{p:"afternoon",t:"Altabury Heights, Skyward Tavern \u2013 Collect the Gold Beetle by the barrels in the corner. (39/50)",beetle:39},
+{p:"afternoon",t:"Spend time with Eupha. You'll accept the side quest \"Wayward Shepherd\". Requires Rank 4 Eloquence. (Rank 6)",follower:"Eupha",rank:6,quest:1},
+{p:"night",t:"Altabury Heights, Blue Sky Bridge \u2013 Debate Julian at the podium. Choose option 3 to win the debate. You'll unlock 🏆 Debate Me. (+7 Eloquence, +2 Imagination)",trophy:1}]},
+{d:"09/14",tasks:[
+{p:"afternoon",t:"Altabury Heights, Blue Sky Bridge \u2013 Help the Man in Pain to get another Tail Bait."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to Orbwise Path. This is solely so we can go fishing."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Interact with the Cooking Table to unlock new recipes and cook Finisher Noodles."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Make a backup save and then go fishing using the Tail Bait. The prompt that appears is random, so keep reloading until you catch 1 Lord of the Lake and 2 Queen's Honey Jars at the same time."},
+{p:"afternoon",t:"Orbwise Path \u2013 Once you arrive, you can instantly leave and go back to town."},
+{p:"night",t:"Spend time with Catherina. (Rank 5)",follower:"Catherina",rank:5}]},
+{d:"09/15",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for Everfrost Forest."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Amber Stew."},
+{p:"afternoon",t:"Spend time with Basilio. (Rank 1)",follower:"Basilio",rank:1},
+{p:"afternoon",t:"During an event you'll get the Solstice Crossing Drawing. (+4 Wisdom)"},
+{p:"afternoon",t:"Everfrost Forest \u2013 Collect the Gold Beetle at the very bottom left of the map. (40/50)",beetle:40,dungeon:"Everfrost Forest"},
+{p:"afternoon",t:"Everfrost Forest \u2013 Collect the Panhandled Ore on the right side of the map for Neuras.",dungeon:"Everfrost Forest"},
+{p:"afternoon",t:"Everfrost Forest \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Everfrost Forest"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"09/16",tasks:[
+{p:"afternoon",t:"Altabury Heights, Recruitment Center \u2013 Turn in the bounty \"The Fiend in the Frozen Forest\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Use Edeni's ability to clear the weather on the Tower of Insolence."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to the Tower of Insolence."},
+{p:"afternoon",t:"Spend time with Junah. (Rank 6)",follower:"Junah",rank:6},
+{p:"afternoon",t:"During an event you'll get the Decaying Estate Drawing. (+4 Wisdom)"},
+{p:"afternoon",t:"Tower of Insolence \u2013 Collect the Gold Beetle on the second floor. (41/50)",beetle:41,dungeon:"Tower of Insolence"},
+{p:"afternoon",t:"Tower of Insolence \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Tower of Insolence"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"09/17",tasks:[
+{p:"afternoon",t:"Altabury Heights, Opera House Square \u2013 Turn in the side quest \"Proof of Power\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Spend time with Basilio. (Rank 2)",follower:"Basilio",rank:2},
+{p:"night",t:"Spend time with Catherina. Requires Rank 5 Tolerance. (Rank 6)",follower:"Catherina",rank:6}]},
+{d:"09/18",tasks:[
+{p:"afternoon",t:"Spend time with Bardon to fight a boss and you'll complete the side quest \"The Right to Rule\". The boss is weak to Ice, so make sure to bring a lot of ice based attacks. (+4 Courage) (Rank 7)",follower:"Bardon",rank:7,quest:1},
+{p:"night",t:"Spend time with Junah. (Rank 7)",follower:"Junah",rank:7}]},
+{d:"09/19",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for Mt. Vulkano."},
+{p:"afternoon",t:"Spend time with Basilio. (Rank 3)",follower:"Basilio",rank:3},
+{p:"afternoon",t:"Mt. Vulkano \u2013 Keep progressing through the dungeon until you find a ladder to your left. Follow the path without dropping down any holes to the Gold Beetle. Keep following the path to find the Stitched Sphere for Neuras. (42/50)",beetle:42,dungeon:"Mt. Vulkano"},
+{p:"afternoon",t:"Mt. Vulkano \u2013 On Floor B4, go up the ladder in the center of the room and go through the hole in the wall. Keep following the path to find the Rusty Greatsword, which is used in a later quest.",dungeon:"Mt. Vulkano"},
+{p:"afternoon",t:"Mt. Vulkano \u2013 You can now loot everything, then defeat the boss at the end of the dungeon which will complete \"Wayward Shepherd\". You can return to town afterwards. (+4 Eloquence. Rank 5 Eloquence)",dungeon:"Mt. Vulkano",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"09/20",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Silver 3) (+4 Courage. Rank 5 Courage)"},
+{p:"night",t:"Spend time with Catherina. (Rank 7)",follower:"Catherina",rank:7}]},
+{d:"09/21",tasks:[
+{p:"afternoon",t:"Spend time with Basilio. (Rank 4)",follower:"Basilio",rank:4},
+{p:"night",t:"Spend time with Alonzo. Requires Rank 5 Courage. (Rank 7)",follower:"Alonzo",rank:7}]},
+{d:"09/22",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Silver 2) (+4 Courage)"},
+{p:"night",t:"Spend time with Catherina. (Rank 8)",follower:"Catherina",rank:8}]},
+{d:"09/23",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"09/24",tasks:[
+{p:"afternoon",t:"Plaza of Light \u2013 After a small cutscene in the area with the fountain, go collect the Gold Beetle by one of the burned down houses. This is highly missable as you cannot come back to this area, so make sure you don't forget it. (43/50)",beetle:43,missable:1},
+{p:"afternoon",t:"From here you can progress the story and unlock 🏆 His Majesty.",trophy:1}]},
+{d:"09/25",tasks:[{p:"story",t:"Nothing but story."}]},
+{d:"09/26",tasks:[
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 By this point you should have gotten an Elite Archetype to Rank 20, so you can turn in the side quest \"More's Task Chapter Six: The End\". (+4 Imagination) (Rank 8)",follower:"More",rank:8,quest:1},
+{p:"afternoon",t:"Grand Trad, Sunshade Row \u2013 Accept the side quest \"The Edge of Glory\" from the Ornamented Man. You can instantly turn the quest in since you already found the Rusty Greatsword earlier. (+4 Wisdom. Rank 5 Wisdom)",quest:1},
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Accept the side quest \"The Queen of Cuisine: Soul\" from the Classy Woman.",quest:1},
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Accept the bounties \"The Cockatrice in the Clouds\", \"The Apostles of the Apocalypse\", and \"The Incarnate in the Woods\"."},
+{p:"afternoon",t:"Brilehaven, Angler's Inn Square \u2013 Accept the side quest \"Trial of the Dragon: Mad Mischief\" from the Gabby Mustari.",quest:1},
+{p:"afternoon",t:"Virga Island \u2013 Accept the side quest \"Trial of the Dragon: Heroes' Rest\" from Edeni.",quest:1},
+{p:"afternoon",t:"Altabury Heights, Blue Sky Bridge \u2013 Accept the side quest \"Trial of the Dragon: Bygone Legacy\" from the Enraged Mustari.",quest:1},
+{p:"afternoon",t:"Altabury Heights, Blue Sky Bridge \u2013 Accept the side quest \"Deliver Hot Spring Water\" from the Gentle Merchant.",quest:1},
+{p:"afternoon",t:"Martira, Cattleracket Road \u2013 Collect the Gold Beetle located by the cow at the bottom of the stairs. (44/50)",beetle:44},
+{p:"afternoon",t:"Martira, MesmerEyes Apothecary \u2013 Collect the Gold Beetle by the sack of grain. (45/50)",beetle:45},
+{p:"afternoon",t:"Grand Trad, Regalith Grand Cathedral \u2013 Collect the Gold Beetle in one of the merchant stalls. (46/50)",beetle:46},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 You can talk to the Elderly Entomophile to turn in all of your Gold Beetles to unlock 🏆 All That Glitters. There are still 4 more Gold Beetles in the game, so if you missed any, you should still be in the clear to earn the trophy in this playthrough, and you can just turn it in after collecting the last ones, as long as you didn't miss more than 4.",trophy:1,missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to the Abandoned Path. You'll end up encountering Loveless's Gauntlet Runner on the way, and then afterwards you'll want to stop at Malva."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and read the Literacy Workbook. (+6 Imagination)"},
+{p:"afternoon",t:"You'll encounter Loveless's Gauntlet Runner and have to fight him."},
+{p:"afternoon",t:"Malva \u2013 Once you arrive at Malva, you'll unlock 🏆 Globetrotter. While you're here, make sure to buy Altabury Wheat Flour and the Durable Spider Silk. You can also buy any purification items if you wish, then continue your trip.",trophy:1},
+{p:"night",t:"Gauntlet Runner \u2013 Cook Indestructible Honey Cake."},
+{p:"night",t:"Gauntlet Runner \u2013 Go to the bookshelf and read the Literacy Workbook. (+6 Imagination. Rank 5 Imagination)"}]},
+{d:"09/27",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Enchanted Pottage."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Go to the bookshelf and finish reading the Literacy Workbook. You'll also unlock 🏆 Bookworm. (+12 Imagination)",trophy:1},
+{p:"afternoon",t:"Abandoned Path \u2013 There will be a Gold Beetle at the north most point of the map. (47/50)",beetle:47,dungeon:"Abandoned Path"},
+{p:"afternoon",t:"Abandoned Path \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Abandoned Path",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"09/28",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Turn in the bounty \"The Incarnate of the Woods\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Grand Trad, Sunlumeo Street \u2013 Turn in the side quest \"The Queen of Cuisine: Soul\" by giving her the Indestructible Honey Cake you made. (+4 Eloquence)",quest:1},
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Accept the side quest \"Defeat Milo\" from Loveless. This only appears after defeating him on his Gauntlet Runner.",quest:1},
+{p:"afternoon",t:"Altabury Heights, Dia Franco Street \u2013 Turn in the side quest \"Warmth in Winter\". (+4 Tolerance)",quest:1},
+{p:"afternoon",t:"Altabury Heights, Lunlumo Approach \u2013 Talk to Milo to mark his Gauntlet Runner on the map."},
+{p:"afternoon",t:"Spend time with Basilio. (Rank 5)",follower:"Basilio",rank:5},
+{p:"night",t:"Spend time with Neuras. This will complete the side quest \"Relic Search: Bitter Memories\" and start \"Relic Search: A Dream's Origin\". (Rank 6)",follower:"Neuras",rank:6,quest:1}]},
+{d:"09/29",tasks:[
+{p:"afternoon",t:"Spend time with Eupha. Requires Rank 5 Wisdom. (Rank 7)",follower:"Eupha",rank:7},
+{p:"night",t:"Spend time with Neuras. This will complete the side quest \"Relic Search: A Dream's Origin\" and start \"Petty Thief\". (Rank 7)",follower:"Neuras",rank:7,quest:1}]},
+{d:"09/30",tasks:[
+{p:"afternoon",t:"Grand Trad, Regalith Grand Cathedral \u2013 Talk to the Grand Cathedral Guard to mark Jin's Gauntlet Runner on the map."},
+{p:"afternoon",t:"Spend time with Basilio. Requires Rank 5 Imagination. (Rank 6)",follower:"Basilio",rank:6},
+{p:"night",t:"Spend time with Alonzo. You'll end up accepting the side quest \"A Rake's Last Wish\". (Rank 8)",follower:"Alonzo",rank:8,quest:1}]},
+{d:"10/01",tasks:[
+{p:"afternoon",t:"Spend time with Bardon. (Rank 8)",follower:"Bardon",rank:8},
+{p:"night",t:"Brilehaven, Angler's Inn Square \u2013 Talk to Dataram and spend time with him to complete \"A Rake's Last Wish\".",quest:1},
+{p:"night",t:"Spend time with Junah. (Rank 8)",follower:"Junah",rank:8}]},
+{d:"10/02",tasks:[
+{p:"afternoon",t:"Spend time with Basilio. You'll accept the side quest \"A Brother's Mercy\". (Rank 7)",follower:"Basilio",rank:7,quest:1},
+{p:"night",t:"Spend time with Brigitta. (Rank 8)",follower:"Brigitta",rank:8}]},
+{d:"10/03",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to the Manor of the Ascendant."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Adamantine Honey Cake."},
+{p:"afternoon",t:"Spend time with Eupha. (Rank 8)",follower:"Eupha",rank:8},
+{p:"afternoon",t:"Manor of the Ascendant \u2013 After crossing the beams on the 2nd floor, there will be a hole you can crawl through that will lead to a Gold Beetle. (48/50)",beetle:48,dungeon:"Manor of the Ascendant"},
+{p:"afternoon",t:"Manor of the Ascendant \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Manor of the Ascendant",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/04",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Turn in the bounty \"The Cockatrice in the Clouds\". (+4 Courage)",quest:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Disgraced Ruins."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Precision Fermented Ribs."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Sublime Spoonful. You'll then unlock 🏆 King of Cuisine.",trophy:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever you like to pass time."},
+{p:"afternoon",t:"During an event you'll get the Malibelo Stope Drawing and unlock 🏆 Vista Viewer. (+4 Wisdom)",trophy:1},
+{p:"afternoon",t:"Disgraced Ruins \u2013 At the very start of the dungeon, follow the left path to a Gold Beetle. (49/50)",beetle:49,dungeon:"Disgraced Ruins"},
+{p:"afternoon",t:"Disgraced Ruins \u2013 You can now loot everything, then defeat the boss at the end of the dungeon and return to town.",dungeon:"Disgraced Ruins",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/05",tasks:[
+{p:"afternoon",t:"Grand Trad, Recruitment Center \u2013 Turn in the bounty \"The Apostles of Apocalypse\".",quest:1},
+{p:"afternoon",t:"Spend time with Basilio. Requires Rank 5 Eloquence. This will complete the side quest \"A Brother's Mercy\". (+4 Tolerance) (Rank 8)",follower:"Basilio",rank:8,quest:1},
+{p:"night",t:"Altabury Heights, Blue Sky Bridge \u2013 Spend time at the Hot Spring to get Hot Spring Water."}]},
+{d:"10/06",tasks:[
+{p:"afternoon",t:"Altabury Heights, Blue Sky Bridge \u2013 Turn in the side quest \"Deliver Hot Spring Water\" and you'll get a Gold Beetle. (50/50)",beetle:50,quest:1},
+{p:"afternoon",t:"Brilehaven, Arenafront Wharf \u2013 You can talk to the Elderly Entomophile to turn in all of your Gold Beetles to unlock 🏆 All That Glitters if you haven't before, as we've collected the final beetle now. If you did, you can trade the extra 4 to him for some Arcane Dragonblood.",trophy:1,missable:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course to Jin's Gauntlet Runner."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Cook Sublime Spoonful. You'll then unlock 🏆 King of Cuisine.",trophy:1},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever you like to pass time."},
+{p:"afternoon",t:"Defeat Jin, and you'll complete \"Petty Thief\" for Neuras. You'll then unlock 🏆 Hearts as One. (Rank 8)",follower:"Neuras",rank:8,trophy:1,quest:1},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/07",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for Milo's Gauntlet Runner."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever you like to pass time."},
+{p:"night",t:"Altabury Heights, Dia Franco Street \u2013 Turn in the side quest \"Defeat Milo\".",quest:1},
+{p:"night",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Silver 1) (+4 Courage)"}]},
+{d:"10/08",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Skybound Avatar."},
+{p:"afternoon",t:"Skybound Avatar \u2013 After defeating the boss at the end of the dungeon, you'll unlock 🏆 Skybound Hope, and 🏆 Worldly Wisdom shortly after.",trophy:1,dungeon:"Skybound Avatar"},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/09",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Forsaken Tower."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever you like to pass time."},
+{p:"afternoon",t:"Forsaken Tower \u2013 Go to the top of the tower and defeat the boss, which will complete \"Trial of the Dragon: Mad Mischief\". You can then return to town.",dungeon:"Forsaken Tower",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/10",tasks:[
+{p:"afternoon",t:"Virga Island \u2013 Use Edeni's power to clear the weather on the Spire of Blind Faith. While the bad weather doesn't affect the dragon boss itself, it will affect all other mobs in the map since the Spire of Blind Faith is always in bad weather."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Spire of Blind Faith."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever you like to pass time."},
+{p:"afternoon",t:"Spire of Blind Faith \u2013 Go to the top of the tower and defeat the boss, which will complete \"Trial of the Dragon: Heroes' Rest\". You can then return to town.",dungeon:"Spire of Blind Faith",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/11",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Tower of Insolence."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever to pass time."},
+{p:"afternoon",t:"Tower of Insolence \u2013 Defeat the boss at the end of the dungeon to complete \"Trial of the Dragon: Bygone Legacy\". You'll then accept \"Trial of the Dragon: Essence of Power\". You can then return to town.",dungeon:"Tower of Insolence",quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/12",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Dragon Temple."},
+{p:"afternoon",t:"Gauntlet Runner \u2013 Feel free to do whatever to pass time."},
+{p:"afternoon",t:"Dragon Temple \u2013 Defeat the boss at the end of the dungeon to complete \"Trial of the Dragon: Essence of Power\" and unlock 🏆 Entrusted. Make sure you don't bring any equipment that repels attacks, or else the boss will instantly kill you. You can then return to town.",dungeon:"Dragon Temple",trophy:1,quest:1},
+{p:"night",t:"Skipped due to entering a dungeon."}]},
+{d:"10/13",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Gold 3) (+4 Courage)"},
+{p:"night",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Gold 2) (+4 Courage)"}]},
+{d:"10/14",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. (Gold 1) (+4 Courage)"}]},
+{d:"10/15",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in a Ranked Battle. You'll then accept the side quest \"Become Champion of the Coliseum\". (+4 Courage)",quest:1},
+{p:"night",t:"Brilehaven, Coliseum \u2013 Talk to the Spirited Receptionist and take part in the Champion Battle and complete \"Become Champion of the Coliseum\". (+4 Courage)",quest:1}]},
+{d:"10/16",tasks:[
+{p:"afternoon",t:"Brilehaven, Coliseum \u2013 Create a back up save and then speak to the Taciturn Receptionist and take part in the Gold Gauntlet Challenge and win 30 battles. This will unlock 🏆 Star Shatterer (Coliseum Champion). You can then reload your save so you can spend your time a different way, though if you've followed the guide perfectly up to this point, there is no need as the rest of the days are free days anyway.",trophy:1},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/17",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/18",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/19",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/20",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/21",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/22",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/23",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/24",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."}]},
+{d:"10/25",tasks:[
+{p:"afternoon",t:"Feel free to do whatever to pass the time, or catch up on anything you missed."},
+{p:"night",t:"Spend time with all your followers."}]},
+{d:"10/26",tasks:[
+{p:"afternoon",t:"Gauntlet Runner \u2013 Chart a course for the Tyrant's Star."},
+{p:"afternoon",t:"Tyrant's Star \u2013 Throughout the dungeon you'll encounter Melancholia Crystals that you can destroy, which will weaken the final boss. In order to unlock 🏆 Star Shatterer, you can't destroy a single one of those Melancholia Crystals and need to defeat the final boss while he's at full strength. This can be quite difficult, so if you're struggling to defeat him, you can lower the difficulty to Storyteller and you'll be able to just keep spam attacking him then fully revive your party whenever you wipe in order to cheese the fight.",dungeon:"Tyrant's Star",trophy:1,missable:1},
+{p:"afternoon",t:"Tyrant's Star \u2013 Towards the end of the dungeon, there will be a cluster of 3 Trance Crystals that spawns a Human type enemy that gives you a lot of EXP and A-EXP upon being defeated. This is a great place to unlock 🏆 Archetype Hero if you haven't already.",trophy:1,dungeon:"Tyrant's Star"},
+{p:"afternoon",t:"Tyrant's Star \u2013 After defeating the final boss, you'll unlock 🏆 Star Shatterer, and you'll also unlock 🏆 Help Anyone in Need after the final quest completes.",trophy:1,dungeon:"Tyrant's Star"}]},
+{d:"12/35",tasks:[
+{p:"afternoon",t:"Spend time with all your followers and then watch the final scenes of the game. After the final cutscene ends after the credits, you'll unlock 🏆 Coronation of the King. Make sure you save your Clear Save Data, as you'll be needing it.",trophy:1}]}
+];
+const DUNGEONS=[
+{name:"Nord Mines",unlock:"06/06",type:"Main Story",hint:"Optional dragon near the end is weak to Ice. Get at least 2 characters with Mage Rank 2. Cannot return to this dungeon!",enemies:[
+{n:"Rock Mole",w:["Wind","Elec"],r:["Phys"],nl:[]},{n:"Armored Beetle",w:["Fire"],r:["Phys","Slash","Strike"],nl:[]},{n:"Mine Dragon (Optional)",w:["Ice"],r:["Fire","Phys"],nl:[]}]},
+{name:"Catacombs",unlock:"06/12",type:"Main Story",hint:"Use the Mage's Magic Recovery passive + Trance Crystals for near-infinite MP. Many enemies weak to Fire and Light.",enemies:[
+{n:"Bonehead",w:["Fire"],r:["Phys"],nl:["Dark"]},{n:"Ghostly Knight",w:["Light"],r:["Phys","Slash"],nl:["Dark"]},{n:"Skull Shaman",w:["Fire","Light"],r:[],nl:["Dark"]},{n:"Trance Wight",w:["Fire"],r:[],nl:["Dark"]}]},
+{name:"Belega Corridor",unlock:"06/15",type:"Side Quest",hint:"Gold Beetle on floor B3 via the tunnel on the left side of the big open room. Ice and Wind work well.",enemies:[
+{n:"Desert Lizard",w:["Ice","Wind"],r:["Fire"],nl:[]},{n:"Sand Crawler",w:["Wind","Elec"],r:["Phys"],nl:[]},{n:"Dune Serpent",w:["Ice"],r:["Fire","Phys"],nl:[]}]},
+{name:"Tradia Desert",unlock:"06/18",type:"Side Quest",hint:"Gold Beetle in the bush near a rock to the left of where you start. Ice and Elec are effective.",enemies:[
+{n:"Sand Imp",w:["Ice","Light"],r:[],nl:["Fire"]},{n:"Desert Golem",w:["Elec","Wind"],r:["Phys","Fire"],nl:[]},{n:"Mirage Beast",w:["Ice","Dark"],r:["Fire","Wind"],nl:[]}]},
+{name:"Imp's Den",unlock:"06/29",type:"Side Quest",hint:"Gold Beetle in the very north area. Imp King is the bounty target — weak to Light and Elec.",enemies:[
+{n:"Imp",w:["Fire","Light"],r:["Dark"],nl:[]},{n:"Imp Mage",w:["Wind","Phys"],r:["Dark","Fire"],nl:[]},{n:"Imp King (Boss)",w:["Light","Elec"],r:["Dark","Fire","Ice"],nl:[]}]},
+{name:"Giant Sandworm's Nest",unlock:"07/03",type:"Main Story",hint:"Cannot return! Grab all loot before reaching the exit. Elec decimates the Giant Sandworm.",enemies:[
+{n:"Sand Parasite",w:["Fire","Light"],r:["Phys"],nl:[]},{n:"Worm Soldier",w:["Elec","Ice"],r:["Phys","Fire"],nl:[]},{n:"Giant Sandworm",w:["Elec"],r:["Phys","Fire","Ice"],nl:[]}]},
+{name:"Man-Eater's Grotto",unlock:"07/05",type:"Side Quest",hint:"Steal from an enemy here for the 'What's Yours is Mine' trophy (use R3 to restart). Gold Beetle on bottom floor near north staircases.",enemies:[
+{n:"Cave Troll",w:["Fire","Wind"],r:["Phys"],nl:[]},{n:"Talkative Tooth",w:["Ice","Light"],r:["Dark"],nl:[]},{n:"Man-Eater",w:["Fire","Elec"],r:["Phys","Ice"],nl:[]},{n:"Stone Guardian",w:["Elec","Wind"],r:["Phys","Slash","Strike"],nl:[]}]},
+{name:"Blind Well Alley",unlock:"07/08",type:"Main Story",hint:"Sneak past the special enemy — no reward for fighting it. Level Thief Archetype to 11 for Plunder Magic to steal MP when needed.",enemies:[
+{n:"Sewer Rat",w:["Fire","Elec"],r:[],nl:[]},{n:"Shadow Thief",w:["Light"],r:["Dark","Phys"],nl:[]},{n:"Lurking Horror",w:["Fire","Light"],r:["Phys","Dark"],nl:[]}]},
+{name:"Abandoned Tomb",unlock:"07/10",type:"Side Quest",hint:"Gold Beetle on floor B2 — follow the ladders down. Fire and Light are your best bets.",enemies:[
+{n:"Tomb Wraith",w:["Light","Fire"],r:["Phys","Dark"],nl:[]},{n:"Ancient Warrior",w:["Fire","Wind"],r:["Phys","Slash"],nl:[]},{n:"Bone Colossus (Boss)",w:["Fire"],r:["Phys","Slash","Strike"],nl:["Dark"]}]},
+{name:"Tomb of Lament",unlock:"07/29",type:"Side Quest",hint:"Two Gold Beetles: one via crawl space on the bottom floor, one at the end via a wall hole. Also grab the Gypsum Crystal for Neuras in the same crawl space.",enemies:[
+{n:"Lament Wraith",w:["Light","Fire"],r:["Phys","Dark"],nl:[]},{n:"Cursed Remnant",w:["Fire","Elec"],r:["Phys"],nl:["Dark"]},{n:"Sorrow Revenant",w:["Light"],r:["Phys","Dark"],nl:[]}]},
+{name:"Gracia Forest",unlock:"07/30",type:"Side Quest",hint:"Gold Beetle in the north-east most corner of the map. Wind and Elec work against most forest enemies.",enemies:[
+{n:"Vine Creeper",w:["Fire","Wind"],r:["Elec"],nl:[]},{n:"Forest Predator",w:["Elec","Ice"],r:["Phys","Wind"],nl:[]},{n:"Gracia Guardian",w:["Fire"],r:["Phys","Wind"],nl:[]}]},
+{name:"Forsaken Tower",unlock:"08/02",type:"Side Quest",hint:"Gold Beetle on the 5th Floor. Mark it on map by buying 'Fiend of the Forsaken Tower' from the Brilehaven informant.",enemies:[
+{n:"Tower Specter",w:["Light","Fire"],r:["Dark","Phys"],nl:[]},{n:"Stone Gargoyle",w:["Elec","Wind"],r:["Phys","Strike"],nl:[]},{n:"Tower Warden (Boss)",w:["Fire","Light"],r:["Phys","Dark"],nl:[]}]},
+{name:"Skyrunner Charadrius",unlock:"08/03",type:"Main Story",hint:"Mostly boss fights — defeat each in 3 turns or less for full rewards. Port or Starboard Corridor are both fine; backtrack only for extra items.",enemies:[
+{n:"Ship Guard",w:["Elec","Wind"],r:["Phys"],nl:[]},{n:"Armored Captain",w:["Fire","Light"],r:["Phys","Slash"],nl:[]},{n:"Charadrius Boss",w:["Light","Elec"],r:["Phys","Dark"],nl:[]}]},
+{name:"Dragon Temple",unlock:"08/19",type:"Main Story",hint:"Collect all 3 Polar Stones before finding Eupha — needed for a side quest. Grind Magla Pills from Papyrga (butterfly enemies) at Trance Crystals.",enemies:[
+{n:"Temple Guardian",w:["Elec","Dark"],r:["Phys","Fire"],nl:["Ice"]},{n:"Dragon Acolyte",w:["Light","Wind"],r:["Dark","Fire"],nl:[]},{n:"Dragon Temple Boss",w:["Light"],r:["Phys","Fire","Dark"],nl:[]}]},
+{name:"Land of Ceremony",unlock:"08/21",type:"Main Story",hint:"West side diagonal path on Floor B2 has the Mossy Pillar for Neuras. Gold Beetle near the end on the first floor.",enemies:[
+{n:"Ceremony Shade",w:["Fire","Light"],r:["Dark","Phys"],nl:[]},{n:"Ceremony Sentinel",w:["Elec","Wind"],r:["Phys","Slash"],nl:["Dark"]},{n:"Ceremony Boss",w:["Light","Fire"],r:["Phys","Dark"],nl:[]}]},
+{name:"Orbwise Path",unlock:"08/22",type:"Side Quest",hint:"Two Gold Beetles on the first floor. Completing this unlocks Junah as a follower via 'Save the Mourning Snakes'.",enemies:[
+{n:"Orbwise Specter",w:["Light","Elec"],r:["Dark","Phys"],nl:[]},{n:"Path Guardian",w:["Fire","Wind"],r:["Phys","Slash"],nl:[]},{n:"Orbwise Boss",w:["Light"],r:["Phys","Dark"],nl:[]}]},
+{name:"Spire of Blind Faith",unlock:"08/25",type:"Side Quest",hint:"Always under Heat weather — bring Dekaja and Dekunda. Keep everyone in the back row against the final boss. Gold Beetle on 6th floor.",enemies:[
+{n:"Spire Shade",w:["Ice","Dark"],r:["Fire","Phys"],nl:[]},{n:"Blind Acolyte",w:["Elec","Wind"],r:["Phys","Light"],nl:[]},{n:"Spire Boss",w:["Ice"],r:["Fire","Phys","Dark"],nl:[]}]},
+{name:"Scoundrel's Hold",unlock:"08/27",type:"Side Quest",hint:"At the very start, go left through the hole in the wall for Parquet Chest (Neuras relic). Gold Beetle on the last floor — climb the south ladder.",enemies:[
+{n:"Scoundrel Thief",w:["Light","Elec"],r:["Dark","Phys"],nl:[]},{n:"Scoundrel Brute",w:["Fire","Elec"],r:["Phys","Slash"],nl:[]},{n:"Scoundrel Boss",w:["Light","Wind"],r:["Phys","Dark"],nl:[]}]},
+{name:"Montario Opera House",unlock:"09/10",type:"Main Story",hint:"Go down the leftmost hallway, take the second right. Backtrack for 3 dropped keys. Defeat the final boss for 'Mission Completed' trophy.",enemies:[
+{n:"Opera Shade",w:["Light","Fire"],r:["Dark","Phys"],nl:[]},{n:"Masked Phantom",w:["Elec","Wind"],r:["Phys","Ice"],nl:["Dark"]},{n:"Louis Guiabern",w:[],r:["Phys","Ice","Fire","Wind","Elec"],nl:["Dark"]}]},
+{name:"Everfrost Forest",unlock:"09/13",type:"Side Quest",hint:"Gold Beetle on east side of first floor near two chests. Fire is effective against nearly everything here.",enemies:[
+{n:"Frost Wolf",w:["Fire"],r:["Ice","Wind"],nl:[]},{n:"Blizzard Golem",w:["Fire","Elec"],r:["Ice","Phys"],nl:[]},{n:"Everfrost Boss",w:["Fire"],r:["Ice","Phys","Wind"],nl:[]}]},
+{name:"Mt. Vulkano",unlock:"09/16",type:"Side Quest",hint:"Gold Beetle in the same area as the Neuras relic chest. Most enemies resist Fire — bring Ice.",enemies:[
+{n:"Lava Crawler",w:["Ice","Wind"],r:["Fire","Phys"],nl:[]},{n:"Magma Golem",w:["Ice","Elec"],r:["Fire","Phys","Slash"],nl:[]},{n:"Volcano Drake",w:["Ice"],r:["Fire","Phys"],nl:[]}]},
+{name:"Skybound Avatar",unlock:"09/26",type:"Main Story",hint:"Gold Beetles #41 and #42 inside. Deadline is 10/25. Bring your best gear for a challenging final dungeon.",enemies:[
+{n:"Royal Shade",w:["Dark","Fire"],r:["Light","Phys"],nl:[]},{n:"Palace Knight",w:["Elec","Fire"],r:["Phys","Slash"],nl:["Wind"]},{n:"Skybound Boss",w:["Dark"],r:["Phys","Light","Fire"],nl:[]}]},
+{name:"Tyrant's Star",unlock:"10/09",type:"Main Story",hint:"The final dungeon. Gold Beetles on floors 5, 8, 11, and last floor. Defeat the final boss for 'Chronicle's End' and the game's conclusion.",enemies:[
+{n:"Star Wraith",w:["Light","Elec"],r:["Phys","Dark"],nl:[]},{n:"Tyrant Guard",w:["Fire","Light"],r:["Phys","Dark","Ice"],nl:[]},{n:"Final Boss",w:["Light"],r:["Phys","Fire","Ice","Wind","Elec"],nl:["Dark"]}]}
+];
+
+const FOLLOWERS=[
+{name:"Strohl",max:10},{name:"Hulkenberg",max:10},{name:"Brigitta",max:8},
+{name:"Maria",max:8},{name:"Heismay",max:8},{name:"Neuras",max:8},
+{name:"Catherina",max:8},{name:"Cuculus",max:6},{name:"Bardon",max:8},
+{name:"More",max:8},{name:"Alonzo",max:8},{name:"Junah",max:10},
+{name:"Eupha",max:10},{name:"Basilio",max:8}
+];
+const VTHR=[0,5,11,18,26,35];
+const EC={Fire:"#e07050",Ice:"#70b0e0",Elec:"#d4c050",Wind:"#70d090",Light:"#e0d070",Dark:"#9070c0",Phys:"#c09070",Slash:"#d08070",Strike:"#b09898"};
+function es(e){var c=EC[e]||"#aaa";return"background:"+c+"22;color:"+c+";border:.5px solid "+c+"55";}
+
+let S={day:0,doneDays:new Set(),tasks:{},beetles:new Set(),virtues:{wisdom:0,courage:0,tolerance:0,imagination:0,eloquence:0},followers:{},trophies:new Set(),tab:"guide"};
+
+function load(){try{var p=JSON.parse(localStorage.getItem("mrf_v5")||"{}");S.doneDays=new Set(p.dd||[]);S.tasks=p.t||{};S.beetles=new Set(p.b||[]);S.virtues=p.v||S.virtues;S.followers=p.f||{};S.trophies=new Set(p.tr||[]);S.day=p.day||0;S.tab=p.tab||"guide";}catch(e){}}
+function save(){try{localStorage.setItem("mrf_v5",JSON.stringify({dd:[...S.doneDays],t:S.tasks,b:[...S.beetles],v:S.virtues,f:S.followers,tr:[...S.trophies],day:S.day,tab:S.tab}));}catch(e){}updateStats();}
+
+function updateStats(){
+  document.getElementById("s-b").textContent=S.beetles.size;
+  document.getElementById("s-d").textContent=S.doneDays.size;
+  document.getElementById("s-ds").textContent="of "+DAYS.length+" total";
+  var tk=0,tot=0;
+  DAYS.forEach(function(d,di){d.tasks.forEach(function(t,ti){tot++;if(S.tasks[di+"-"+ti])tk++;});});
+  document.getElementById("s-t").textContent=countEarnedTrophies()+"/44";
+  document.getElementById("s-tk").textContent=tk;
+  document.getElementById("s-tks").textContent="of "+tot+" total";
+}
+
+function openTab(t){S.tab=t;document.querySelectorAll(".nb").forEach(function(b){b.classList.remove("active");});var btn=document.getElementById("tab-"+t);if(btn)btn.classList.add("active");render();save();}
+function render(){var mc=document.getElementById("mc");mc.innerHTML=S.tab==="guide"?rGuide():S.tab==="dungeons"?rDungeons():S.tab==="virtues"?rVirtues():S.tab==="beetles"?rBeetles():S.tab==="trophies"?rTrophies():rFollowers();}
+
+/* ─── GUIDE TAB ─────────────────────────────────────────────────────── */
+function rGuide(){
+  var d=DAYS[S.day],pct=Math.round(S.day/DAYS.length*100),done=S.doneDays.has(S.day);
+  var grp={};
+  d.tasks.forEach(function(t,i){if(!grp[t.p])grp[t.p]=[];grp[t.p].push({t:t,i:i});});
+  var dgs=[];
+  d.tasks.forEach(function(t){if(t.dungeon&&dgs.indexOf(t.dungeon)<0)dgs.push(t.dungeon);});
+  var h='<div class="dnav">';
+  h+='<button class="arr" onclick="goDay(-1)"'+(S.day===0?" disabled":"")+">&#8249;</button>";
+  h+='<div class="dc"><div class="ddbtn" onclick="openCal()" title="Click to jump to any date">&#128197; '+d.d+' <span style="font-size:12px;color:var(--text3)">&#9662;</span></div>';
+  h+='<div class="dsub">Day '+(S.day+1)+" of "+DAYS.length+" &mdash; click date to jump</div></div>";
+  h+='<div class="pbar"><div class="pfill" style="width:'+pct+'%"></div></div>';
+  h+='<button class="dbtn '+(done?"done":"undone")+'" onclick="toggleDay('+S.day+')">'+(done?"&#10003; Completed":"Mark Done")+"</button>";
+  h+='<button class="arr" onclick="goDay(1)"'+(S.day===DAYS.length-1?" disabled":"")+">&#8250;</button></div>";
+  if(dgs.length){
+    h+='<div class="dbanner"><div class="dbhd"><span style="color:var(--red);font-size:15px">&#9876;</span>&nbsp;<h3>Dungeon Day &mdash; '+dgs.join(" &amp; ")+"</h3></div>";
+    dgs.forEach(function(name){
+      var dg=DUNGEONS.find(function(x){return x.name===name;});if(!dg)return;
+      h+='<div class="tip">&#128161; '+dg.hint+"</div>";
+      h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:5px">'+name+" &mdash; Enemies &amp; Weaknesses</div>";
+      h+='<div class="egrid" style="margin-bottom:8px">'+dg.enemies.map(ec).join("")+"</div>";
+    });
+    h+="</div>";
+  }
+  h+='<div class="content">';
+  var periods=["afternoon","night","story","travel"];
+  var labels={afternoon:"Afternoon",night:"Night",story:"Story",travel:"Travel"};
+  periods.forEach(function(p){
+    if(!grp[p])return;
+    h+='<div class="pb"><span class="pl '+p+'">'+labels[p]+"</span>";
+    grp[p].forEach(function(item){
+      var t=item.t,i=item.i,k=S.day+"-"+i,ck=!!S.tasks[k];
+      var tags="";
+      if(t.missable)tags+='<span class="tag tm">&#9888; MISSABLE</span>';
+      if(t.beetle)tags+='<span class="tag tb">🪲 Beetle #'+t.beetle+"</span>";
+      if(t.trophy)tags+='<span class="tag ttr">&#127942; Trophy</span>';
+      if(t.quest)tags+='<span class="tag tq">&#128220; Quest</span>';
+      if(t.follower)tags+='<span class="tag tf">&#128100; '+t.follower+" Rank "+t.rank+"</span>";
+      if(t.dungeon&&!t.beetle)tags+='<span class="tag td">&#9876; Dungeon</span>';
+      h+='<div class="ti '+(ck?"done":"")+"\" onclick=\"toggleTask("+S.day+","+i+')">';
+      h+='<div class="tc"><span class="chk">&#10003;</span></div>';
+      h+="<div><span class=\"tt\">"+t.t+"</span>"+(tags?'<div class="tags">'+tags+"</div>":"")+"</div></div>";
+    });
+    h+="</div>";
+  });
+  return h+"</div>";
+}
+
+function ec(e){
+  var h='<div class="ec"><div class="en">'+e.n+"</div>";
+  if(e.w&&e.w.length)h+='<div class="wr"><div class="wl">Weak</div>'+e.w.map(function(x){return'<span class="eb" style="'+es(x)+'">'+x+"</span>";}).join("")+"</div>";
+  if(e.r&&e.r.length)h+='<div class="wr"><div class="wl">Resist</div>'+e.r.map(function(x){return'<span class="eb" style="background:#203040;color:#5090b0;border:.5px solid #305060">'+x+"</span>";}).join("")+"</div>";
+  if(e.nl&&e.nl.length)h+='<div class="wr"><div class="wl">Null</div>'+e.nl.map(function(x){return'<span class="eb" style="background:#1a1a1a;color:#888;border:.5px solid #444">'+x+"</span>";}).join("")+"</div>";
+  return h+"</div>";
+}
+
+/* ─── CALENDAR ──────────────────────────────────────────────────────── */
+function openCal(){
+  var mnames={"06":"June","07":"July","08":"August","09":"September","10":"October","12":"December"};
+  var monthOrder=["06","07","08","09","10","12"];
+  var months={};
+  DAYS.forEach(function(d,i){
+    var mn=d.d.slice(0,2);
+    if(!months[mn])months[mn]={label:mnames[mn]||mn,days:{}};
+    var dayNum=parseInt(d.d.slice(3));
+    months[mn].days[dayNum]={d:d.d,i:i,hb:d.tasks.some(function(t){return t.beetle;}),hm:d.tasks.some(function(t){return t.missable;}),hd:d.tasks.some(function(t){return t.dungeon;}),cs:d.tasks.every(function(t){return t.p==="story";})};
+  });
+  var h='<div class="chd"><h2>&#128197; Jump to Date</h2><button class="cx" onclick="closeCal()">&#215;</button></div>';
+  h+='<div class="cleg"><div class="cli"><div class="cld" style="background:#350f08;border-color:var(--orange)"></div>Missable</div><div class="cli"><div class="cld" style="background:#3a2e0a;border-color:var(--gold)"></div>Beetle</div><div class="cli"><div class="cld" style="background:#350808;border-color:#702020"></div>Dungeon</div><div class="cli"><div class="cld" style="background:#0a1e10;border-color:#1a3a20"></div>Done</div><div class="cli"><div class="cld" style="background:transparent;border-color:var(--purple2)"></div>Current</div></div>';
+  h+='<div class="cmonths">';
+  monthOrder.forEach(function(mn){
+    if(!months[mn])return;
+    var m=months[mn];
+    var dayNums=Object.keys(m.days).map(Number);
+    var maxDay=Math.max.apply(null,dayNums);
+    h+='<div><div class="cmhd">'+m.label+"</div>";
+    h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px">';
+    ["Mo","Tu","We","Th","Fr","Sa","Su"].forEach(function(dn){h+='<div style="text-align:center;font-size:9px;color:var(--text3);font-weight:600;padding:2px 0">'+dn+"</div>";});
+    h+="</div>";
+    h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
+    for(var day=1;day<=maxDay;day++){
+      var info=m.days[day];
+      if(!info){h+='<div class="cday" style="cursor:default;opacity:.15">'+day+"</div>";}
+      else{
+        var isDone=S.doneDays.has(info.i),isCur=info.i===S.day;
+        var cls="cday";
+        if(isCur)cls+=" ccur";
+        else if(isDone)cls+=" cdone";
+        else if(info.hm)cls+=" hm";
+        else if(info.hb)cls+=" hb";
+        else if(info.hd)cls+=" hd";
+        else if(info.cs)cls+=" cs";
+        h+='<div class="'+cls+'" onclick="jumpToDay('+info.i+')" title="'+info.d+'">'+day+"</div>";
+      }
+    }
+    h+="</div></div>";
+  });
+  h+="</div>";
+  document.getElementById("cmod").innerHTML=h;
+  document.getElementById("cov").classList.add("open");
+}
+function closeCal(){document.getElementById("cov").classList.remove("open");}
+function jumpToDay(i){S.day=i;closeCal();render();save();}
+
+/* ─── DUNGEONS TAB ──────────────────────────────────────────────────── */
+function rDungeons(){
+  var h='<div class="content"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px">All Dungeons &amp; Enemy Weaknesses</div>';
+  h+='<input class="sbar" placeholder="Search dungeons or enemies\u2026" oninput="filterDg(this.value)">';
+  h+='<div id="dgl">';
+  DUNGEONS.forEach(function(dg,i){
+    var s=(dg.name+" "+dg.enemies.map(function(e){return e.n+" "+[].concat(e.w||[]).concat(e.r||[]).join(" ");}).join(" ")).toLowerCase();
+    h+='<div class="dge" data-s="'+s+'">';
+    h+='<div class="dghd"><div class="dgn">'+dg.name+'</div><span class="'+(dg.type==="Main Story"?"dgm":"dgs")+'">'+dg.type+'</span><span class="dgu">Unlocks '+dg.unlock+"</span></div>";
+    h+='<div class="tip">&#128161; '+dg.hint+"</div>";
+    h+='<div class="egrid">'+dg.enemies.map(ec).join("")+"</div>";
+    if(i<DUNGEONS.length-1)h+='<div class="sep"></div>';
+    h+="</div>";
+  });
+  return h+"</div></div>";
+}
+function filterDg(q){document.querySelectorAll(".dge").forEach(function(el){el.style.display=(!q||el.dataset.s.includes(q.toLowerCase()))?"":"none";});}
+
+/* ─── VIRTUES TAB ───────────────────────────────────────────────────── */
+function computeVirtuePoints(virtue){
+  var pts=0;
+  var re=new RegExp("\\(\\+(\\d+)\\s+"+virtue+"[\\s.,)]","i");
+  DAYS.forEach(function(d,di){d.tasks.forEach(function(t,ti){
+    if(!S.tasks[di+"-"+ti])return;
+    var m=t.t.match(re);
+    if(m)pts+=parseInt(m[1]);
+  });});
+  return pts;
+}
+function rVirtues(){
+  var defs=[{k:"wisdom",col:"#70a0e0"},{k:"courage",col:"#e07050"},{k:"tolerance",col:"#60b870"},{k:"imagination",col:"#b878e0"},{k:"eloquence",col:"#e0be50"}];
+  var h='<div class="content"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px">Royal Virtues</div><div class="vgrid">';
+  defs.forEach(function(def){
+    var v=def.k,col=def.col;
+    var computed=computeVirtuePoints(v);
+    var pts=Math.max(S.virtues[v]||0,computed);
+    var rank=0;
+    for(var i=1;i<VTHR.length;i++)if(pts>=VTHR[i])rank=i;
+    var prev=VTHR[rank]||0,next=VTHR[rank+1]||99,inR=pts-prev,need=next-prev;
+    var count=Math.min(need,10);
+    var pips="";
+    for(var j=0;j<count;j++)pips+='<div class="pip'+(j<inR?" on":"")+'" style="'+(j<inR?"background:"+col+";border-color:"+col:"border-color:var(--border2)")+'"></div>';
+    h+='<div class="vc '+v+'">';
+    h+='<div class="vn">'+v+"</div>";
+    h+='<div class="vr">Rank '+(rank+1)+"</div>";
+    h+='<div class="vp">'+pts+" pts"+(computed>0?" ("+computed+" from tasks)":"")+"</div>";
+    h+='<div class="vpips">'+pips+"</div>";
+    h+='<div class="vbtns">';
+    h+='<button class="vbtn" onclick="chV(\''+v+"',-1)\">\u2212</button>";
+    h+='<button class="vbtn" onclick="chV(\''+v+"',1)\">+1</button>";
+    h+='<button class="vbtn" onclick="chV(\''+v+"',4)\">+4</button>";
+    h+='<button class="vbtn" onclick="chV(\''+v+"',8)\">+8</button>";
+    h+="</div></div>";
+  });
+  return h+'</div><div style="font-size:10px;color:var(--text3);margin-top:8px">Rank thresholds: 0 \u2192 5 \u2192 11 \u2192 18 \u2192 26 \u2192 35 pts. Virtue points auto-counted from completed tasks.</div></div>';
+}
+
+/* ─── BEETLES TAB ───────────────────────────────────────────────────── */
+function rBeetles(){
+  var locs=["#1 \u2014 Camp behind Strohl (06/05) \u26A0 MISSABLE","#2 \u2014 Grand Trad Sunshade Row stairs (06/11)","#3 \u2014 Comfort Concoctions spice sack (06/11)","#4 \u2014 Recruitment Center hallway (06/12)","#5 \u2014 Belega Corridor floor B3 (06/15)","#6 \u2014 Tradia Desert bush near rock (06/18)","#7 \u2014 Martira Visca Alba Tavern fireplace (06/29)","#8 \u2014 Martira Visca Alba Inn water jug \u26A0 random (06/29)","#9 \u2014 Imp's Den north area (06/29)","#10 \u2014 Man-Eater's Grotto bottom floor N staircases (07/05)","#11 \u2014 Abandoned Tomb floor B2 (07/11)","#12 \u2014 Brilehaven Seabreeze Street dock (07/20)","#13 \u2014 Brilehaven Seabreeze Street alley dead end (07/20)","#14 \u2014 Brilehaven Bazaar near Black Cat's Crow (07/20)","#15 \u2014 Brilehaven Bazaar corner by Recruitment Center (07/20)","#16 \u2014 Brilehaven Arenafront Wharf top right (07/20)","#17 \u2014 Tomb of Lament bottom floor crawl hole (07/29)","#18 \u2014 Tomb of Lament end of dungeon wall hole (07/29)","#19 \u2014 Gracia Forest north-east corner (07/30)","#20 \u2014 Forsaken Tower 5th Floor (08/02)","#21 \u2014 Dental Distress quest reward (08/03)","#22 \u2014 Virga Island by Rooster Inn (08/18)","#23 \u2014 Virga Island behind Golden Deer Hearth (08/18)","#24 \u2014 Virga Island walkway by Chief's House (08/18)","#25 \u2014 Virga Island platform behind Dragon Statue (08/18)","#26 \u2014 Virga Island boxes near Gauntlet Runner (08/18)","#27 \u2014 Grand Trad Comfort Concoctions behind pots (08/19)","#28 \u2014 Virga Island Clumsy Boy beside the well (08/20)","#29 \u2014 Land of Ceremony first floor corner (08/21)","#30 \u2014 Orbwise Path right side first floor (08/22)","#31 \u2014 Orbwise Path NW stairs corner first floor (08/22)","#32 \u2014 Spire of Blind Faith 6th floor (08/25)","#33 \u2014 Scoundrel's Hold last floor south ladder (08/30)","#34 \u2014 Altabury Lunlumo Approach right sidewalk Night (09/09)","#35 \u2014 Altabury Lunlumo Approach stairs near bridge Night (09/09)","#36 \u2014 Altabury Whitepeaks Magic Shop pot Night (09/09)","#37 \u2014 Altabury Blue Sky Bridge pillars Night (09/09)","#38 \u2014 Altabury Opera House Square giant bridge Night (09/09)","#39 \u2014 Altabury Skyward Tavern barrels corner (09/13)","#40 \u2014 Everfrost Forest bottom left of map (09/15)","#41 \u2014 Tower of Insolence 2nd floor (09/16)","#42 \u2014 Mt. Vulkano ladder path (09/19)","#43 \u2014 Plaza of Light burned house \u26A0 MISSABLE (09/24)","#44 \u2014 Martira Cattleracket Road by cow (09/26)","#45 \u2014 Martira MesmerEyes Apothecary by sack of grain (09/26)","#46 \u2014 Grand Trad Regalith Cathedral merchant stall (09/26)","#47 \u2014 Abandoned Path north most point (09/27)","#48 \u2014 Manor of the Ascendant 2nd floor crawl hole (10/03)","#49 \u2014 Disgraced Ruins left path at dungeon start (10/04)","#50 \u2014 Deliver Hot Spring Water quest reward (10/06)"];
+  var h='<div class="content"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px"><div>';
+  h+='<div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">Gold Beetles</div>';
+  h+='<div style="font-size:26px;font-weight:700;color:var(--gold2)">'+S.beetles.size+' <span style="font-size:12px;color:var(--text3);font-weight:400">/ 50 collected</span></div></div>';
+  h+='<div style="font-size:10px;color:var(--text2);text-align:right;max-width:180px">Need 46 of 50 for &#127942; All That Glitters<br>Beetles auto-track from completed tasks.</div></div>';
+  h+='<div class="bgrid">';
+  for(var i=1;i<=50;i++){var g=S.beetles.has(i);h+='<div class="bs '+(g?"got":"")+'" onclick="toggleBeetle('+i+')" title="#'+i+'">'+(g?"\uD83E\uDEB2":'<span class="bsn">'+i+"</span>")+"</div>";}
+  h+='</div><div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:7px;margin-top:12px">All 50 Locations:</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px 18px">';
+  locs.forEach(function(l){h+='<div style="font-size:10px;color:'+(l.indexOf("\u26A0")>=0?"var(--orange)":"var(--text2)")+'">'+l+"</div>";});
+  return h+"</div></div>";
+}
+
+/* ─── FOLLOWERS TAB ─────────────────────────────────────────────────── */
+function rFollowers(){
+  var taskRanks={};
+  DAYS.forEach(function(d,di){d.tasks.forEach(function(t,ti){
+    if(t.follower&&t.rank&&S.tasks[di+"-"+ti])
+      taskRanks[t.follower]=Math.max(taskRanks[t.follower]||0,t.rank);
+  });});
+  var h='<div class="content"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Follower Bond Ranks</div>';
+  h+='<div style="font-size:10px;color:var(--text2);margin-bottom:10px">Rank auto-updates from completed tasks. Use +/\u2212 to adjust manually.</div>';
+  h+='<div class="fgrid">';
+  FOLLOWERS.forEach(function(f){
+    var taskR=taskRanks[f.name]||0;
+    var manualR=S.followers[f.name]||0;
+    var r=Math.max(taskR,manualR);
+    var maxed=r>=f.max;
+    var pips="";
+    for(var i=0;i<f.max;i++)pips+='<div class="rpip '+(i<r?"on":"")+'"></div>';
+    h+='<div class="fc"'+(maxed?' style="border-color:var(--pink)"':"")+'">';
+    h+='<div class="fn"'+(maxed?' style="color:var(--pink)"':"")+">"+f.name+(maxed?" \u2713":"")+"</div>";
+    h+='<div class="frr"><span class="frl">Bond Rank</span><span class="frv"'+(maxed?' style="color:var(--green)"':"")+">"+r+"/"+f.max+"</span></div>";
+    h+='<div class="rpips">'+pips+"</div>";
+    h+='<div class="fbtns"><div class="fbtn" onclick="chF(\''+f.name+"\',-1)\">\u2212</div><div class=\"fbtn\" onclick=\"chF(\'"+f.name+"\',1)\">+</div></div>";
+    h+="</div>";
+  });
+  return h+"</div></div>";
+}
+
+/* ─── TROPHIES TAB ──────────────────────────────────────────────────── */
+var ALL_TROPHIES=[
+  {key:"t01",name:"The Traveller",desc:"Acquire all achievements.",snip:null},
+  {key:"t02",name:"Coronation of the King",desc:"Witness the ending.",snip:"Coronation of the King"},
+  {key:"t03",name:"Allies United",desc:"Traverse the Northern Border Fort.",snip:"Allies United"},
+  {key:"t04",name:"Out of the Fire",desc:"Traverse the Nord Mines.",snip:"Out of the Fire"},
+  {key:"t05",name:"Calamity Averted",desc:"Traverse the Regalith Grand Cathedral.",snip:"Calamity Averted"},
+  {key:"t06",name:"Dark Truths",desc:"Traverse Kriegante Castle.",snip:"Dark Truths"},
+  {key:"t07",name:"On Knife's Edge",desc:"Traverse the Charadrius.",snip:"On Knife's Edge"},
+  {key:"t08",name:"History Untold",desc:"Traverse the Dragon Temple.",snip:"History Untold"},
+  {key:"t09",name:"Mission Accomplished",desc:"Traverse Montario Opera House.",snip:"Mission Accomplished"},
+  {key:"t10",name:"Skybound Hope",desc:"Traverse the Skybound Avatar.",snip:"Skybound Hope"},
+  {key:"t11",name:"Closing the Book",desc:"Defeat the redscale dragon from the Book of Apocalypse. (New Game+)",snip:null},
+  {key:"t12",name:"Star Shatterer",desc:"Defeat Destroyer Charadrius, wielder of true power.",snip:"Star Shatterer"},
+  {key:"t13",name:"Archetype Adept",desc:"Master an Archetype.",snip:null},
+  {key:"t14",name:"Archetype Hero",desc:"Master all the Archetypes with the protagonist.",snip:null},
+  {key:"t15",name:"His Majesty",desc:"Study the Prince Archetype.",snip:"His Majesty"},
+  {key:"t16",name:"United Front",desc:"Use a Synthesis skill for the first time.",snip:"United Front"},
+  {key:"t17",name:"Teamwork Makes the Dream Work",desc:"Use 50 different Synthesis skills.",snip:null},
+  {key:"t18",name:"For Science!",desc:"Perform a Special Experiment.",snip:"For Science"},
+  {key:"t19",name:"Summon Mask Time",desc:"Create all summoning vessels and masks.",snip:null},
+  {key:"t20",name:"Stunning!",desc:"Stun an enemy.",snip:"Stunning!"},
+  {key:"t21",name:"Tactical Strike",desc:"Inflict ambush damage against stunned enemies 100 times.",snip:null},
+  {key:"t22",name:"What's Yours is Mine",desc:"Steal an item from an enemy.",snip:"What's Yours is Mine"},
+  {key:"t23",name:"Money is Power",desc:"Spend a total of 100,000 reeve using skills that consume money.",snip:null},
+  {key:"t24",name:"Stray Elements",desc:"Defeat 10 Elmentas.",snip:null},
+  {key:"t25",name:"No Mercy",desc:"End 50 battles without taking damage.",snip:null},
+  {key:"t26",name:"All That Glitters",desc:"Make all possible gold beetle item exchanges.",snip:"All That Glitters"},
+  {key:"t27",name:"Hey, Listen!",desc:"Consult Gallica 100 times.",snip:null},
+  {key:"t28",name:"Shake on It",desc:"Obtain a Follower.",snip:"Shake on It"},
+  {key:"t29",name:"Hearts as One",desc:"Max all Follower ranks.",snip:"Hearts as One"},
+  {key:"t30",name:"King of Cuisine",desc:"Make all recipes.",snip:"King of Cuisine"},
+  {key:"t31",name:"Monster Hunter",desc:"Subjugate a bounty.",snip:"Monster Hunter"},
+  {key:"t32",name:"Help Anyone in Need",desc:"Complete all quests.",snip:"Help Anyone in Need"},
+  {key:"t33",name:"Blessed Power",desc:"Purify a piece of equipment.",snip:"Blessed Power"},
+  {key:"t34",name:"Shrewd Shopper",desc:"Buy an item on discount.",snip:"Shrewd Shopper"},
+  {key:"t35",name:"Globetrotter",desc:"Visit all towns.",snip:"Globetrotter"},
+  {key:"t36",name:"Worldly Wisdom",desc:"Unlock the entire map.",snip:"Worldly Wisdom"},
+  {key:"t37",name:"Vista Viewer",desc:"Collect all drawings of the journey.",snip:"Vista Viewer"},
+  {key:"t38",name:"Debate Me",desc:"Win debates against all candidates.",snip:"Debate Me"},
+  {key:"t39",name:"Coliseum Champion",desc:"Win 30 consecutive Gold Class battles at the coliseum.",snip:"Star Shatterer (Coliseum Champion)"},
+  {key:"t40",name:"Sword Surfer",desc:"Travel a significant distance by blade-riding.",snip:null},
+  {key:"t41",name:"Chef in Training",desc:"Help cook a meal at the inn with Maria.",snip:"Chef in Training"},
+  {key:"t42",name:"Entrusted",desc:"Overcome all trials to defeat Louis.",snip:"Entrusted"},
+  {key:"t43",name:"At Your Own Risk",desc:"Successfully challenge the test of courage at the highest difficulty.",snip:"At Your Own Risk"},
+  {key:"t44",name:"Bookworm",desc:"Finish reading all books.",snip:"Bookworm"}
+];
+
+function trophyEarnedFromTasks(trophy){
+  if(!trophy.snip)return false;
+  var snip=trophy.snip;
+  var found=false;
+  DAYS.forEach(function(d,di){d.tasks.forEach(function(t,ti){
+    if(found||!t.trophy||!S.tasks[di+"-"+ti])return;
+    if(t.t.indexOf(snip)>=0)found=true;
+  });});
+  return found;
+}
+
+function countEarnedTrophies(){
+  var n=0;
+  ALL_TROPHIES.forEach(function(t){if(trophyEarnedFromTasks(t)||S.trophies.has(t.key))n++;});
+  return n;
+}
+
+function rTrophies(){
+  var earned=countEarnedTrophies();
+  var pct=Math.round(earned/44*100);
+  var guideTrophies=ALL_TROPHIES.filter(function(t){return t.snip;});
+  var manualTrophies=ALL_TROPHIES.filter(function(t){return !t.snip;});
+
+  var h='<div class="content">';
+  h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">';
+  h+='<div><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3px">Trophies &amp; Achievements</div>';
+  h+='<div style="font-size:26px;font-weight:700;color:var(--cyan)">'+earned+' <span style="font-size:12px;color:var(--text3);font-weight:400">/ 44 ('+pct+'%)</span></div></div>';
+  h+='<div style="font-size:10px;color:var(--text2);text-align:right;max-width:200px">&#127942; Guide trophies auto-track from tasks.<br>Tap any trophy to toggle it.</div></div>';
+  h+='<div style="height:4px;background:var(--bg4);border-radius:2px;margin-bottom:14px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:2px;transition:width .4s"></div></div>';
+
+  h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:7px">From the Walkthrough Guide</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:6px;margin-bottom:16px">';
+  guideTrophies.forEach(function(t){
+    var auto=trophyEarnedFromTasks(t);
+    var manual=S.trophies.has(t.key);
+    var done=auto||manual;
+    h+='<div onclick="toggleTrophy(\''+t.key+'\')" style="padding:9px 11px;border-radius:7px;background:'+(done?"#0a2535":"var(--bg3)")+';border:.5px solid '+(auto?"var(--cyan)":done?"var(--purple)":"var(--border)")+';cursor:pointer;transition:all .15s">';
+    h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">';
+    h+='<span style="font-size:14px">'+(done?"\uD83C\uDFC6":"\u25A1")+"</span>";
+    h+='<span style="font-size:12px;font-weight:600;color:'+(done?"var(--cyan)":"var(--text)")+'">'+t.name+"</span>";
+    if(auto)h+='<span style="font-size:9px;color:var(--cyan);margin-left:auto">AUTO</span>';
+    h+="</div>";
+    h+='<div style="font-size:10px;color:var(--text3)">'+t.desc+"</div></div>";
+  });
+  h+="</div>";
+
+  h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:7px">Other / New Game+</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:6px">';
+  manualTrophies.forEach(function(t){
+    var done=S.trophies.has(t.key);
+    h+='<div onclick="toggleTrophy(\''+t.key+'\')" style="padding:9px 11px;border-radius:7px;background:'+(done?"#1a0a2a":"var(--bg3)")+';border:.5px solid '+(done?"var(--purple)":"var(--border)")+';cursor:pointer;transition:all .15s">';
+    h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">';
+    h+='<span style="font-size:14px">'+(done?"\uD83C\uDFC6":"\u25A1")+"</span>";
+    h+='<span style="font-size:12px;font-weight:600;color:'+(done?"var(--purple)":"var(--text)")+'">'+t.name+"</span>";
+    h+="</div>";
+    h+='<div style="font-size:10px;color:var(--text3)">'+t.desc+"</div></div>";
+  });
+  return h+"</div></div>";
+}
+
+/* ─── INTERACTIONS ──────────────────────────────────────────────────── */
+function applyTaskSideEffects(t,add){
+  if(t.follower&&t.rank){
+    // follower rank is computed from tasks in rFollowers, no manual S.followers update needed
+    // but keep manual adjustments separate
+  }
+}
+
+function toggleDay(i){
+  if(S.doneDays.has(i)){
+    S.doneDays.delete(i);
+    DAYS[i].tasks.forEach(function(t,ti){
+      var k=i+"-"+ti;
+      if(S.tasks[k]){delete S.tasks[k];if(t.beetle)S.beetles.delete(t.beetle);}
+    });
+  } else {
+    S.doneDays.add(i);
+    DAYS[i].tasks.forEach(function(t,ti){
+      var k=i+"-"+ti;
+      if(!S.tasks[k]){S.tasks[k]=true;if(t.beetle)S.beetles.add(t.beetle);}
+    });
+  }
+  render();save();
+}
+
+function toggleTask(day,task){
+  var k=day+"-"+task,t=DAYS[day].tasks[task];
+  if(S.tasks[k]){delete S.tasks[k];if(t.beetle)S.beetles.delete(t.beetle);}
+  else{S.tasks[k]=true;if(t.beetle)S.beetles.add(t.beetle);}
+  var allDone=DAYS[day].tasks.every(function(_,ti){return S.tasks[day+"-"+ti];});
+  if(allDone)S.doneDays.add(day);else S.doneDays.delete(day);
+  render();save();
+}
+
+function toggleBeetle(n){if(S.beetles.has(n))S.beetles.delete(n);else S.beetles.add(n);render();save();}
+function chV(v,d){S.virtues[v]=Math.max(0,(S.virtues[v]||0)+parseInt(d));render();save();}
+function chF(name,d){var f=FOLLOWERS.find(function(x){return x.name===name;});S.followers[name]=Math.max(0,Math.min(f.max,(S.followers[name]||0)+parseInt(d)));render();save();}
+function toggleTrophy(key){if(S.trophies.has(key))S.trophies.delete(key);else S.trophies.add(key);render();save();}
+function goDay(d){var n=S.day+d;if(n>=0&&n<DAYS.length){S.day=n;render();save();}}
+function resetAll(){if(confirm("Reset ALL progress? This cannot be undone.")){localStorage.removeItem("mrf_v5");S={day:0,doneDays:new Set(),tasks:{},beetles:new Set(),virtues:{wisdom:0,courage:0,tolerance:0,imagination:0,eloquence:0},followers:{},trophies:new Set(),tab:"guide"};openTab("guide");}}
+
+load();openTab(S.tab||"guide");updateStats();
+
+</script>
+</body>
+</html>
